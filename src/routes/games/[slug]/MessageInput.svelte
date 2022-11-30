@@ -22,7 +22,7 @@
 	<input
 		bind:value
 		type="text"
-		class="appearance-none w-full px-3 py-2 rounded-lg text-sm border border-base-700 bg-base-800 focus:outline-none focus:border-base-600 focus:text-white"
+		class="appearance-none w-full px-3 py-2 rounded-lg text-sm border border-base-700 bg-base-900 focus:outline-none focus:border-base-600 focus:text-white"
 		placeholder="Send a message"
 		on:keydown={(e) => submitOnEnter(e)}
 	/>

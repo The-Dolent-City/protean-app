@@ -1,10 +1,10 @@
 <script>
+	import { onMount } from 'svelte';
 	import { supabaseClient } from '$lib/db';
 	import { updateUser } from '$lib/api';
 	import { channelMessages, channelUsers, presence } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
-	import { onMount } from 'svelte';
 
 	export let onsubmit;
 
@@ -28,11 +28,6 @@
 		formNickname = $user?.nickname;
 		formColor = $user?.color ? $user.color : '#27272a';
 	});
-
-	async function signout() {
-		await supabaseClient.auth.signOut();
-		throw redirect(303, '/');
-	}
 
 	function valid() {
 		return formNickname && formColor;
@@ -74,40 +69,42 @@
 	$: changesMade = formNickname != $user?.nickname || formColor != $user?.color;
 </script>
 
-<form on:submit|preventDefault={submit} class="flex flex-col gap-6">
-	<label>
-		<div class="mb-1 text-sm">Nickname</div>
-		<input
-			type="text"
-			bind:value={formNickname}
-			class="appearance-none px-1.5 py-0.5 rounded border border-base-700 text-default bg-base-800 focus:outline-none focus:text-focus focus:border-base-600"
-		/>
-	</label>
-	<div>
-		<div class="mb-2 text-sm">Color</div>
-		<div class="flex flex-wrap gap-2 place-content-evenly">
-			{#each colors as color}
-				<label>
-					<div class="sr-only">{color}</div>
-					<input
-						type="radio"
-						bind:group={formColor}
-						name="colors"
-						value={color}
-						class="appearance-none w-8 h-8 rounded-md checked:outline checked:outline-2 checked:outline-offset-1 checked:outline-white"
-						style:background-color={color}
-					/>
-				</label>
-			{/each}
+<form on:submit|preventDefault={submit} class="flex flex-col">
+	<div class="flex flex-col w-full gap-3">
+		<label>
+			<div class="mb-1 text-sm">Nickname</div>
+			<input
+				type="text"
+				bind:value={formNickname}
+				class="appearance-none px-1.5 py-1 rounded border border-base-700 text-default bg-base-900 focus:outline-none focus:text-focus focus:border-base-600"
+			/>
+		</label>
+		<div>
+			<div class="mb-2 text-sm">Color</div>
+			<div class="flex flex-wrap gap-2 place-content-evenly">
+				{#each colors as color}
+					<label>
+						<div class="sr-only">{color}</div>
+						<input
+							type="radio"
+							bind:group={formColor}
+							name="colors"
+							value={color}
+							class="appearance-none w-8 h-8 rounded-md checked:outline checked:outline-2 checked:outline-offset-2 checked:outline-white"
+							style:background-color={color}
+						/>
+					</label>
+				{/each}
+			</div>
 		</div>
 	</div>
 	{#if changesMade}
-		<div class="flex w-full justify-end">
+		<div class="flex -mx-6 mt-4 -mb-4 border-t border-base-800">
 			<button
 				type="submit"
-				class="flex px-2 py-1 gap-1 items-center rounded-md border text-xs text-focus border-base-700 bg-base-800"
+				class="flex w-full px-6 py-4 gap-2 items-center font-semibold text-focus outline-base-800 hover:outline hover:outline-1 hover:outline-base-700 hover:bg-base-800"
 			>
-				<Checkmark size={16} />
+				<Checkmark size={20} class="p-1 rounded-full bg-green-600 text-white" />
 				<span>Save changes</span>
 			</button>
 		</div>
