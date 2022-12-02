@@ -4,6 +4,7 @@ import { AuthApiError } from '@supabase/supabase-js';
 
 export const actions = {
 	signin: async (event) => {
+		console.log('signin');
 		const { request } = event;
 		const { supabaseClient } = await getSupabase(event);
 		const formData = await request.formData();
@@ -31,6 +32,7 @@ export const actions = {
 	},
 
 	signup: async (event) => {
+		console.log('signup');
 		const { request } = event;
 		const { supabaseClient } = await getSupabase(event);
 		const formData = await request.formData();

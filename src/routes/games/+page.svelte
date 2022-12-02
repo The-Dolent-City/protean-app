@@ -4,10 +4,7 @@
 
 	export let data;
 
-	onMount(() => {
-		$user = data?.user;
-		console.log($user);
-	});
+	$user = data?.user;
 </script>
 
 <svelte:head>
