@@ -2,8 +2,6 @@ import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { redirect } from '@sveltejs/kit';
 import { getChannel, getMessages, getUser } from '$lib/api';
 
-export const prerender = true;
-
 export const load = async (event) => {
 	const { session, supabaseClient } = await getSupabase(event);
 	if (!session) {

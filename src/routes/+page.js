@@ -1,8 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 
-export const prerender = true;
-
 export const load = async (event) => {
 	const { session, supabaseClient } = await getSupabase(event);
 
