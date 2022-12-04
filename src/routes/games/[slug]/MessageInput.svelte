@@ -3,6 +3,7 @@
 	import { addMessage } from '$lib/api';
 	import { channel } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
+	import Textfield from '$lib/components/Textfield.svelte';
 
 	let value;
 
@@ -19,11 +20,11 @@
 </script>
 
 <div class="sticky top-0 left-0 right-0 w-full p-3 -my-3 border-b border-base-800 bg-base-900">
-	<input
-		bind:value
+	<Textfield
 		type="text"
-		class="appearance-none w-full px-3 py-2 rounded-lg text-sm border border-base-700 bg-base-900 focus:outline-none focus:border-base-600 focus:text-white"
-		placeholder="Send a message"
+		bind:value
 		on:keydown={(e) => submitOnEnter(e)}
+		placeholder="Send a message"
+		size="sm"
 	/>
 </div>

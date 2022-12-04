@@ -5,6 +5,7 @@
 	import { channelMessages, channelUsers, presence } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
+	import Textfield from '$lib/components/Textfield.svelte';
 
 	export let onsubmit;
 
@@ -22,6 +23,7 @@
 		'#a21caf',
 		'#be185d'
 	];
+	let submitting = false;
 	let error;
 
 	onMount(() => {
@@ -35,6 +37,7 @@
 
 	async function submit() {
 		if (changesMade && valid()) {
+			submitting = true;
 			try {
 				await updateUser(supabaseClient, $user?.id, formNickname, formColor);
 				$channelMessages.forEach((message) => {
@@ -63,6 +66,8 @@
 			if (onsubmit) {
 				onsubmit();
 			}
+
+			submitting = false;
 		}
 	}
 
@@ -70,18 +75,11 @@
 </script>
 
 <form on:submit|preventDefault={submit} class="flex flex-col">
-	<div class="flex flex-col w-full gap-3">
-		<label>
-			<div class="mb-1 text-sm">Nickname</div>
-			<input
-				type="text"
-				bind:value={formNickname}
-				class="appearance-none px-1.5 py-1 rounded border border-base-700 text-default bg-base-900 focus:outline-none focus:text-focus focus:border-base-600"
-			/>
-		</label>
-		<div>
+	<div class="w-full">
+		<Textfield type="text" label="Nickname" bind:value={formNickname} />
+		<div class="mt-3">
 			<div class="mb-2 text-sm">Color</div>
-			<div class="flex flex-wrap gap-2 place-content-evenly">
+			<div class="grid grid-cols-5 gap-2 items-stretch">
 				{#each colors as color}
 					<label>
 						<div class="sr-only">{color}</div>
@@ -90,7 +88,7 @@
 							bind:group={formColor}
 							name="colors"
 							value={color}
-							class="appearance-none w-8 h-8 rounded-md checked:outline checked:outline-2 checked:outline-offset-2 checked:outline-white"
+							class="appearance-none w-full h-full rounded-md checked:outline checked:outline-2 checked:outline-offset-2 checked:outline-white"
 							style:background-color={color}
 						/>
 					</label>
@@ -98,10 +96,11 @@
 			</div>
 		</div>
 	</div>
-	{#if changesMade}
+	{#if changesMade || submitting}
 		<div class="flex -mx-6 mt-4 -mb-4 border-t border-base-800">
 			<button
 				type="submit"
+				disabled={submitting}
 				class="flex w-full px-6 py-4 gap-2 items-center font-semibold text-focus outline-base-800 hover:outline hover:outline-1 hover:outline-base-700 hover:bg-base-800"
 			>
 				<Checkmark size={20} class="p-1 rounded-full bg-green-600 text-white" />

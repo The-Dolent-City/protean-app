@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --color-user: 39 39 42;
-  }
-}
-
 @layer components {
   .text-default {
     @apply text-base-400;

@@ -18,8 +18,7 @@ module.exports = {
 					800: colors.zinc['800'],
 					900: colors.zinc['900'],
 					950: '#0f0f12'
-				},
-				user: 'rgb(var(--color-user) / <alpha-value>)'
+				}
 			},
 			fontSize: {
 				xs: ['0.75rem', '1rem']

@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
 	import { header } from '$lib/stores/header-store';
 	import { channel, channelMessages } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
@@ -13,6 +12,10 @@
 	$channelMessages = data.messages;
 	$user = data.user;
 </script>
+
+<svelte:head>
+	<title>Protean | {$header}</title>
+</svelte:head>
 
 <MessageWidget />
 <UserWidget />
