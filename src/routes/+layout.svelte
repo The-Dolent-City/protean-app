@@ -1,16 +1,21 @@
 <script>
 	import '../styles/app.css';
+	import { onMount } from 'svelte';
+	import { redirect } from '@sveltejs/kit';
 	import { supabaseClient } from '$lib/db';
 	import { invalidate } from '$app/navigation';
-	import { onMount } from 'svelte';
 	import Container from './Container.svelte';
 
 	onMount(() => {
 		const {
 			data: { subscription }
-		} = supabaseClient.auth.onAuthStateChange(() => {
-      console.log("supabaseClient.auth.onAuthStateChange:invalidate");
+		} = supabaseClient.auth.onAuthStateChange(async (event, session) => {
+			console.log(event);
 			invalidate('supabase:auth');
+
+			if (event == 'PASSWORD_RECOVERY') {
+				throw new redirect(303, '/auth/update-password');
+			}
 		});
 
 		return () => {
@@ -20,5 +25,5 @@
 </script>
 
 <Container>
-  <slot />
+	<slot />
 </Container>

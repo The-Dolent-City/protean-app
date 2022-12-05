@@ -76,7 +76,7 @@
 
 <form on:submit|preventDefault={submit} class="flex flex-col">
 	<div class="w-full">
-		<Textfield type="text" label="Nickname" bind:value={formNickname} />
+		<Textfield type="text" label="Nickname" bind:value={formNickname} size="sm" />
 		<div class="mt-3">
 			<div class="mb-2 text-sm">Color</div>
 			<div class="grid grid-cols-5 gap-2 items-stretch">
@@ -88,7 +88,7 @@
 							bind:group={formColor}
 							name="colors"
 							value={color}
-							class="appearance-none w-full h-full rounded-md checked:outline checked:outline-2 checked:outline-offset-2 checked:outline-white"
+							class="appearance-none w-full h-full min-h-[1.5rem] rounded-md checked:outline checked:outline-2 checked:outline-offset-2 checked:outline-white"
 							style:background-color={color}
 						/>
 					</label>
@@ -101,7 +101,7 @@
 			<button
 				type="submit"
 				disabled={submitting}
-				class="flex w-full px-6 py-4 gap-2 items-center font-semibold text-focus outline-base-800 hover:outline hover:outline-1 hover:outline-base-700 hover:bg-base-800"
+				class="flex w-full px-6 py-4 gap-2 items-center font-semibold text-focus outline-base-800 hover:outline hover:outline-1 hover:outline-base-700 hover:bg-base-800 focus:outline focus:outline-1 focus:outline-base-700 focus:bg-base-800"
 			>
 				<Checkmark size={20} class="p-1 rounded-full bg-green-600 text-white" />
 				<span>Save changes</span>

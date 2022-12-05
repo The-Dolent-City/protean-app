@@ -3,8 +3,8 @@
 	import { supabaseClient } from '$lib/db';
 	import { channelMessages, channelUsers, presence } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
-	import Persona from '$lib/components/Persona.svelte';
 	import Widget from '$lib/components/Widget.svelte';
+	import UserPersona from './UserPersona.svelte';
 
 	/** Setup presence */
 	onMount(() => {
@@ -53,7 +53,7 @@
 	>
 		<div class="flex flex-wrap w-full p-3 gap-3">
 			{#each $channelUsers as user}
-				<Persona letter={user?.username[0]} color={user?.color} />
+				<UserPersona {user} />
 			{/each}
 		</div>
 	</Widget>

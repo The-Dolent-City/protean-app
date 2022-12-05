@@ -27,8 +27,13 @@
 	}
 </script>
 
-{#if $channelMessages}
-	<Widget header="Messages" class="col-span-full sm:col-span-6 row-span-4">
+<Widget
+	header="Messages"
+	class="col-span-full sm:col-span-6 row-span-4 overflow-hidden"
+	bodyClass="relative overflow-y-auto"
+	loading={!$channelMessages}
+>
+	{#if $channelMessages}
 		<MessageInput />
 		<div class="mt-10 space-y-6">
 			{#each $channelMessages as message, i (message.id)}
@@ -40,9 +45,7 @@
 			{/each}
 			<pre class="w-full min-h-[1px] bg-base-900" />
 		</div>
-	</Widget>
-{:else}
-	<Widget header="Messages" class="col-span-full sm:col-span-6 row-span-4" loading>
+	{:else}
 		<div class="relative flex-auto min-h-[32rem]" />
-	</Widget>
-{/if}
+	{/if}
+</Widget>
