@@ -9,6 +9,7 @@
 
 <svelte:head>
 	<title>Protean | Games</title>
+	<meta name="description" content="Select an RPG to play with friends." />
 </svelte:head>
 
 {#if data?.channels}

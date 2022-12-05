@@ -11,6 +11,10 @@
 
 <svelte:head>
 	<title>Protean | Auth</title>
+	<meta
+		name="description"
+		content="Login, signup, or change your password for the Protean web app."
+	/>
 </svelte:head>
 
 <div class="flex w-full h-full p-6 items-center justify-center">

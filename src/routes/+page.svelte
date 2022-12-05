@@ -3,6 +3,7 @@
 
 <svelte:head>
 	<title>Protean</title>
+	<meta name="description" content="Play RPGs in realtime with your friends." />
 </svelte:head>
 
 <div class="flex flex-col w-full h-full px-12 py-40 sm:p-40 gap-8 items-center justify-start">

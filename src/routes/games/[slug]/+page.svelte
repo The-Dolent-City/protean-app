@@ -15,6 +15,10 @@
 
 <svelte:head>
 	<title>Protean | {$header}</title>
+	<meta
+		name="description"
+		content="Play RPGs in realtime with friends using the widgets provided on this page."
+	/>
 </svelte:head>
 
 <MessageWidget />

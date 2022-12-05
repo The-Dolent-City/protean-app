@@ -10,6 +10,7 @@
 
 <svelte:head>
 	<title>Protean | Reset Password</title>
+	<meta name="description" content="Send a Protean password reset request to your account email." />
 </svelte:head>
 
 <div class="flex w-full h-full p-6 items-center justify-center">
