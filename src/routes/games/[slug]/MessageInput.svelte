@@ -23,7 +23,7 @@
 	<Textfield
 		type="text"
 		bind:value
-		on:keydown={(e) => submitOnEnter(e)}
+		onkeydown={submitOnEnter}
 		placeholder="Send a message"
 		size="sm"
 	/>

@@ -10,7 +10,7 @@
 		const {
 			data: { subscription }
 		} = supabaseClient.auth.onAuthStateChange(async (event, session) => {
-			console.log(event);
+			console.log(`AuthStateChange:${event}`);
 			invalidate('supabase:auth');
 
 			if (event == 'PASSWORD_RECOVERY') {

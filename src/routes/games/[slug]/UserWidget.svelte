@@ -49,9 +49,9 @@
 {#if $user && $channelUsers}
 	<Widget
 		header="Active users"
-		class="col-span-full sm:col-span-6 lg:col-span-3 2xl:col-span-1 row-span-1"
+		class="col-span-full sm:col-span-6 lg:col-span-4 2xl:col-span-4 row-span-1"
 	>
-		<div class="flex flex-wrap w-full p-3 gap-3">
+		<div class="flex flex-wrap w-full min-h-[4rem] p-3 gap-3">
 			{#each $channelUsers as user}
 				<UserPersona {user} />
 			{/each}
@@ -60,7 +60,7 @@
 {:else}
 	<Widget
 		header="Active users"
-		class="col-span-full sm:col-span-6 lg:col-span-3 2xl:col-span-1 row-span-1"
+		class="col-span-full sm:col-span-6 lg:col-span-4 2xl:col-span-4 row-span-1"
 		loading
 	>
 		<div class="relative flex-auto min-h-[4rem]" />

@@ -62,6 +62,48 @@ export const addMessage = async (client, message, channel_id, user_id) => {
 };
 
 /**
+ * Retrieves all rolls from a channel.
+ * @param {number} channel_id
+ */
+export const getRolls = async (client, channel_id) => {
+	try {
+		let { data } = await client
+			.from('rolls')
+			.select(`*, author:user_id(*)`)
+			.eq('channel_id', channel_id)
+			.order('inserted_at', { ascending: false });
+		return data;
+	} catch (error) {
+		console.error(error);
+		throw new Error('Unable to retrieve rolls.');
+	}
+};
+
+/**
+ * Insert a new roll into the DB.
+ * @param {array} roll The dice roll object
+ * @param {number} channel_id
+ * @param {number} user_id The author
+ */
+export const addRoll = async (client, roll, channel_id, user_id) => {
+	try {
+		const notation = roll?.notation;
+		const rolls = roll?.rolls?.length > 0 ? roll.rolls[0].rolls.map((r) => r.value) : null;
+		const total = roll?.total;
+		const result = roll?.output;
+
+		let { data } = await client
+			.from('rolls')
+			.insert([{ channel_id, user_id, blob: roll, notation, rolls, total, result }])
+			.select();
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to send message.');
+	}
+};
+
+/**
  * Get a single user by id.
  * @param {number} user_id
  */
