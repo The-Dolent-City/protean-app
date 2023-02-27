@@ -3,7 +3,7 @@
 	import { addMessage } from '$lib/api';
 	import { channel } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
-	import Textfield from '$lib/components/Textfield.svelte';
+	import Textarea from '$lib/components/Textarea.svelte';
 
 	let value;
 
@@ -19,12 +19,6 @@
 	}
 </script>
 
-<div class="sticky top-0 left-0 right-0 w-full p-3 -my-3 border-b border-base-800 bg-base-900">
-	<Textfield
-		type="text"
-		bind:value
-		onkeydown={submitOnEnter}
-		placeholder="Send a message"
-		size="sm"
-	/>
+<div class="flex-none w-full p-3 border-b border-base-800 bg-base-900">
+	<Textarea bind:value onkeydown={submitOnEnter} placeholder="Send a message" size="sm" />
 </div>

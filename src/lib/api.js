@@ -62,6 +62,62 @@ export const addMessage = async (client, message, channel_id, user_id) => {
 };
 
 /**
+ * Retrieves all notes for a user from a channel.
+ * @param {number} channel_id
+ * @param {number} user_id
+ */
+export const getNotes = async (client, channel_id, user_id) => {
+	try {
+		let { data } = await client
+			.from('notes')
+			.select(`*`)
+			.eq('channel_id', channel_id)
+			.eq('user_id', user_id)
+			.order('inserted_at', { ascending: false });
+		return data;
+	} catch (error) {
+		console.error(error);
+		throw new Error('Unable to retrieve notes.');
+	}
+};
+
+/**
+ * Insert a new note into the DB.
+ * @param {string} note
+ * @param {number} channel_id
+ * @param {number} user_id The author
+ */
+export const addNote = async (client, note, channel_id, user_id) => {
+	try {
+		let { data } = await client.from('notes').insert([{ channel_id, user_id, note }]).select();
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to create note.');
+	}
+};
+
+/**
+ * Updates a note in the DB.
+ * @param {string} note_id
+ * @param {string} note
+ * @param {number} channel_id
+ * @param {number} user_id
+ */
+export const updateNote = async (client, note_id, note, channel_id, user_id) => {
+	try {
+		let { data } = await client
+			.from('notes')
+			.update({ channel_id, user_id, note })
+			.eq('id', note_id);
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to create note.');
+	}
+};
+
+/**
  * Retrieves all rolls from a channel.
  * @param {number} channel_id
  */
@@ -94,7 +150,17 @@ export const addRoll = async (client, roll, channel_id, user_id) => {
 
 		let { data } = await client
 			.from('rolls')
-			.insert([{ channel_id, user_id, blob: roll, notation, rolls, total, result }])
+			.insert([
+				{
+					channel_id,
+					user_id,
+					blob: roll,
+					notation,
+					rolls,
+					total,
+					result
+				}
+			])
 			.select();
 
 		return data;
@@ -127,8 +193,8 @@ export const updateUser = async (client, user_id, nickname, color) => {
 		const { error } = await client
 			.from('users')
 			.update({
-				nickname: nickname,
-				color: color
+				nickname,
+				color
 			})
 			.eq('id', user_id);
 

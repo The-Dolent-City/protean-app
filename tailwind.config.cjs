@@ -18,12 +18,13 @@ module.exports = {
 					800: colors.zinc['800'],
 					900: colors.zinc['900'],
 					950: '#0f0f12'
-				}
+				},
+				primary: colors.blue
 			},
 			fontSize: {
 				xs: ['0.75rem', '1rem']
 			}
 		}
 	},
-	plugins: []
+	plugins: [require('@tailwindcss/line-clamp')]
 };

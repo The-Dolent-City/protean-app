@@ -48,28 +48,24 @@
 				<p>{form.message}</p>
 			</div>
 		{/if}
-		<p class="mb-6">
-			<Textfield
-				id="email"
-				name="email"
-				type="email"
-				label="Email"
-				value={form?.email ?? ''}
-				required
-				invalidMessage="Email is required"
-			/>
-		</p>
-		<p class="mb-8">
-			<Textfield
-				id="password"
-				name="password"
-				type="password"
-				label="Password"
-				required
-				minlength="6"
-				invalidMessage="Password is required"
-			/>
-		</p>
+		<Textfield
+			id="email"
+			name="email"
+			type="email"
+			label="Email"
+			class="mb-6"
+			value={form?.email ?? ''}
+			required
+		/>
+		<Textfield
+			id="password"
+			name="password"
+			type="password"
+			label="Password"
+			class="mb-8"
+			required
+			minlength="6"
+		/>
 		<button
 			type="submit"
 			class="flex -mx-12 px-12 py-4 gap-3 items-start font-medium text-lg text-focus outline-base-800 outline outline-1 hover:outline-base-700 hover:bg-base-800 focus:outline-base-700 focus:bg-base-800"

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { supabaseClient } from '$lib/db';
 	import { updateUser } from '$lib/api';
-	import { channelMessages, channelUsers, presence } from '$lib/stores/channel-store';
+	import { channelMessages, channelRolls, channelUsers, presence } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 	import Textfield from '$lib/components/Textfield.svelte';
@@ -47,6 +47,13 @@
 					}
 				});
 				$channelMessages = $channelMessages;
+				$channelRolls.forEach((roll) => {
+					if (roll.author.id === $user?.id) {
+						roll.author.nickname = formNickname;
+						roll.author.color = formColor;
+					}
+				});
+				$channelRolls = $channelRolls;
 				$channelUsers.forEach((channelUser) => {
 					if (channelUser?.id === $user?.id) {
 						channelUser.nickname = formNickname;

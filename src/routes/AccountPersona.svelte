@@ -27,7 +27,12 @@
 
 {#if $user}
 	<Popover bind:open position="right">
-		<Persona slot="trigger" onclick={toggleOpen} letter={$user?.username[0]} color={$user?.color} />
+		<Persona
+			slot="trigger"
+			onclick={toggleOpen}
+			letters={$user?.username?.slice(0, 2)}
+			color={$user?.color}
+		/>
 		<svelte:fragment slot="content">
 			<div class="-mx-6 mb-4 px-6 pb-4 border-b border-base-800">
 				<div>Signed in as</div>

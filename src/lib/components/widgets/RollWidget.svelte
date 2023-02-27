@@ -3,9 +3,9 @@
 	import { getUser } from '$lib/api';
 	import { supabaseClient } from '$lib/db';
 	import { channelRolls } from '$lib/stores/channel-store';
-	import Roll from './Roll.svelte';
-	import RollInput from './RollInput.svelte';
 	import Widget from '$lib/components/Widget.svelte';
+	import Roll from '$lib/components/widgets/Roll.svelte';
+	import RollInput from '$lib/components/widgets/RollInput.svelte';
 	import WarningAltFilled from 'carbon-icons-svelte/lib/WarningAltFilled.svelte';
 
 	/** Setup realtime */
@@ -33,26 +33,27 @@
 <Widget
 	header="Rolls"
 	class="col-span-full sm:col-span-6 lg:col-span-4 row-span-4 overflow-hidden"
-	bodyClass="relative overflow-y-auto"
 	{loading}
 >
 	{#if $channelRolls}
 		{#if $channelRolls.length === 0}
-			<RollInput />
-			<div class="absolute left-0 right-0 top-10 bottom-0 flex p-4 items-center justify-center">
+			<div class="grow flex p-4 items-center justify-center">
 				<div class="flex flex-col gap-2 items-center">
 					<WarningAltFilled size={32} class="block text-amber-500" />
 					<h4>No rolls could be loaded</h4>
 				</div>
 			</div>
-		{:else}
 			<RollInput />
-			<div class="mt-10 space-y-6">
-				{#each $channelRolls as roll, i (roll.id)}
-					<Roll author={roll?.author} result={roll?.result} timestamp={roll?.inserted_at} />
-				{/each}
-				<pre class="w-full min-h-[1px] bg-base-900" />
+		{:else}
+			<div class="flex-auto overflow-y-auto [overflow-anchor:auto]">
+				<div class="flex-auto flex flex-col-reverse gap-6 py-3 [overflow-anchor:none]">
+					{#each $channelRolls as roll, i (roll.id)}
+						<Roll author={roll?.author} result={roll?.result} timestamp={roll?.inserted_at} />
+					{/each}
+				</div>
+				<pre class="invisible flex-none w-full min-h-[1px] [overflow-anchor:auto]" />
 			</div>
+			<RollInput />
 		{/if}
 	{:else}
 		<div class="relative flex-auto min-h-[32rem]" />
