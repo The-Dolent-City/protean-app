@@ -1,4 +1,4 @@
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { AuthApiError } from '@supabase/supabase-js';
 
@@ -17,12 +17,12 @@ export const actions = {
 		if (error) {
 			console.error(error);
 			if (error instanceof AuthApiError && error.status[0] === 4) {
-				return invalid(400, {
+				return fail(400, {
 					error: error.message,
 					email
 				});
 			}
-			return invalid(500, {
+			return fail(500, {
 				error: error.message,
 				email
 			});
@@ -48,12 +48,12 @@ export const actions = {
 		if (error) {
 			console.error(error);
 			if (error instanceof AuthApiError && error.status[0] === 4) {
-				return invalid(400, {
+				return fail(400, {
 					error: error.message,
 					email
 				});
 			}
-			return invalid(500, {
+			return fail(500, {
 				error: error.message,
 				email
 			});

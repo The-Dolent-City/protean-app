@@ -11,12 +11,12 @@
 	{#each data.channels as channel}
 		<a
 			href={`/games/${channel.slug}?id=${channel.id}`}
-			class="col-span-full sm:col-span-6 md:col-span-4 p-6 rounded-md border border-base-800 bg-base-900 hover:border-base-700 hover:bg-base-800 mst"
+			class="col-span-full sm:col-span-6 md:col-span-4 self-start p-6 rounded-md border border-base-800 bg-base-900 hover:border-base-700 hover:bg-base-800 mst"
 		>
 			<h2 class="text-xl font-medium text-focus">
 				{channel.title}
 			</h2>
-			<p class="">
+			<p class="mt-2">
 				{channel.description}
 			</p>
 		</a>
