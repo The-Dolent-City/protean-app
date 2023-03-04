@@ -49,7 +49,7 @@
 >
 	<slot name="trigger" />
 	{#if open}
-		<div transition:fly={{ duration: 100, x: 0, y: -20, opacity: 0.01 }} class={css}>
+		<div transition:fly|local={{ duration: 100, x: 0, y: -20, opacity: 0.01 }} class={css}>
 			<slot name="content" />
 		</div>
 	{/if}

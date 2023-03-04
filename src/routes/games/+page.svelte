@@ -1,10 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
-	import { user } from '$lib/stores/user-store';
-
 	export let data;
-
-	$user = data?.user;
 </script>
 
 <svelte:head>

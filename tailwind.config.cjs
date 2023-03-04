@@ -21,6 +21,9 @@ module.exports = {
 				},
 				primary: colors.blue
 			},
+			fontFamily: {
+				sans: 'InterVariable, Inter, Helvetica, Arial, sans-serif'
+			},
 			fontSize: {
 				xs: ['0.75rem', '1rem']
 			}

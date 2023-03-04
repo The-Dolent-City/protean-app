@@ -16,7 +16,6 @@
 		$channelMessages = data.messages;
 		$channelNotes = data.notes;
 		$channelRolls = data.rolls;
-		$user = data.user;
 	});
 </script>
 
@@ -32,6 +31,6 @@
 <RollWidget />
 <!-- <NotesWidget /> -->
 
-{#if $user}
+{#if $user?.id}
 	<UserWidget />
 {/if}

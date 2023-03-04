@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import { supabaseClient } from '$lib/db';
 	import { updateUser } from '$lib/api';
 	import { channelMessages, channelRolls, channelUsers, presence } from '$lib/stores/channel-store';
@@ -40,21 +41,21 @@
 			submitting = true;
 			try {
 				await updateUser(supabaseClient, $user?.id, formNickname, formColor);
-				$channelMessages.forEach((message) => {
+				$channelMessages?.forEach((message) => {
 					if (message.author.id === $user?.id) {
 						message.author.nickname = formNickname;
 						message.author.color = formColor;
 					}
 				});
 				$channelMessages = $channelMessages;
-				$channelRolls.forEach((roll) => {
+				$channelRolls?.forEach((roll) => {
 					if (roll.author.id === $user?.id) {
 						roll.author.nickname = formNickname;
 						roll.author.color = formColor;
 					}
 				});
 				$channelRolls = $channelRolls;
-				$channelUsers.forEach((channelUser) => {
+				$channelUsers?.forEach((channelUser) => {
 					if (channelUser?.id === $user?.id) {
 						channelUser.nickname = formNickname;
 						channelUser.color = formColor;

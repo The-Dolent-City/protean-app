@@ -1,8 +1,6 @@
 <script>
 	import { redirect } from '@sveltejs/kit';
-	import { fly } from 'svelte/transition';
 	import { supabaseClient } from '$lib/db';
-	import { useOutsideClick } from '$lib/actions/use-outside-click';
 	import { user } from '$lib/stores/user-store';
 	import Persona from '$lib/components/Persona.svelte';
 	import AccountPersonaForm from './AccountPersonaForm.svelte';

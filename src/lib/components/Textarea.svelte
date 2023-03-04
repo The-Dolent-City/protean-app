@@ -10,10 +10,10 @@
 
 	$: css = new CssBuilder()
 		.addClass(
-			'peer appearance-none w-full rounded outline outline-1 outline-base-700 text-default cursor-text bg-base-800 resize-none'
+			'peer appearance-none w-full rounded outline outline-1 outline-base-800 text-default cursor-text bg-base-900 resize-none'
 		)
-		.addClass('focus:outline-2 focus:outline-primary-500 focus:caret-primary-500 focus:text-focus')
-		.addClass('placeholder:italic')
+		.addClass('focus:bg-base-800 focus:outline-base-700 focus:caret-base-300 focus:text-focus')
+		.addClass('placeholder:text-base-500')
 		.addClass('text-xs px-2 py-1.5', size === 'xs')
 		.addClass('text-sm px-2 py-1.5', size === 'sm')
 		.addClass('text-base px-2 py-1', size === 'md')

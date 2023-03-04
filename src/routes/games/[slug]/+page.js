@@ -1,6 +1,6 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { redirect } from '@sveltejs/kit';
-import { getChannel, getMessages, getNotes, getRolls, getUser } from '$lib/api';
+import { getChannel, getMessages, getNotes, getRolls } from '$lib/api';
 
 export const load = async (event) => {
 	const { session, supabaseClient } = await getSupabase(event);
@@ -13,15 +13,12 @@ export const load = async (event) => {
 	const messages = await getMessages(supabaseClient, channelId);
 	const notes = await getNotes(supabaseClient, channelId, session?.user?.id);
 	const rolls = await getRolls(supabaseClient, channelId);
-	const user = await getUser(supabaseClient, session?.user?.id);
 
 	return {
 		header: event.params.slug,
-		session,
 		channel,
 		messages,
 		notes,
-		rolls,
-		user
+		rolls
 	};
 };

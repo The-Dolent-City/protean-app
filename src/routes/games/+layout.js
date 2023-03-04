@@ -8,12 +8,11 @@ export const load = async (event) => {
 	if (!session) {
 		throw redirect(303, '/auth');
 	}
-	const channels = await getChannels(supabaseClient);
+
 	const user = await getUser(supabaseClient, session?.user?.id);
 
 	return {
 		session,
-		channels,
 		user
 	};
 };

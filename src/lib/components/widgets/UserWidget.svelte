@@ -25,8 +25,8 @@
 				});
 				users = users.map((user) => user.user);
 				$channelUsers = users;
-				$channelMessages.forEach((message) => {
-					$channelUsers.forEach((channelUser) => {
+				$channelMessages?.forEach((message) => {
+					$channelUsers?.forEach((channelUser) => {
 						if (message.author.id === channelUser.id) {
 							message.author.username = channelUser.username;
 							message.author.nickname = channelUser.nickname;
@@ -35,8 +35,8 @@
 					});
 				});
 				$channelMessages = $channelMessages;
-				$channelRolls.forEach((roll) => {
-					$channelUsers.forEach((channelUser) => {
+				$channelRolls?.forEach((roll) => {
+					$channelUsers?.forEach((channelUser) => {
 						if (roll.author.id === channelUser.id) {
 							roll.author.username = channelUser.username;
 							roll.author.nickname = channelUser.nickname;
