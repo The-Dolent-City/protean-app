@@ -1,12 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
 	import { supabaseClient } from '$lib/db';
 	import { updateUser } from '$lib/api';
 	import { channelMessages, channelRolls, channelUsers, presence } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
+	import Textfield from '$lib/components/inputs/Textfield.svelte';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
-	import Textfield from '$lib/components/Textfield.svelte';
 
 	export let onsubmit;
 

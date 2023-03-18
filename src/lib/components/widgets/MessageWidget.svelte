@@ -3,7 +3,7 @@
 	import { getUser } from '$lib/api';
 	import { supabaseClient } from '$lib/db';
 	import { channelMessages } from '$lib/stores/channel-store';
-	import Widget from '$lib/components/Widget.svelte';
+	import Widget from '$lib/components/widgets/Widget.svelte';
 	import Message from '$lib/components/widgets/Message.svelte';
 	import MessageInput from '$lib/components/widgets/MessageInput.svelte';
 	import WarningAltFilled from 'carbon-icons-svelte/lib/WarningAltFilled.svelte';

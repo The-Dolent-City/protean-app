@@ -1,15 +1,22 @@
 <script>
 	import { onMount } from 'svelte';
-	import { getUser } from '$lib/api';
+	import { getRolls, getUser } from '$lib/api';
 	import { supabaseClient } from '$lib/db';
-	import { channelRolls } from '$lib/stores/channel-store';
-	import Widget from '$lib/components/Widget.svelte';
+	import { channel, channelRolls } from '$lib/stores/channel-store';
+	import Widget from '$lib/components/widgets/Widget.svelte';
 	import Roll from '$lib/components/widgets/Roll.svelte';
 	import RollInput from '$lib/components/widgets/RollInput.svelte';
 	import WarningAltFilled from 'carbon-icons-svelte/lib/WarningAltFilled.svelte';
 
 	/** Setup realtime */
 	onMount(() => {
+		async function load() {
+			$channelRolls = await getRolls(supabaseClient, $channel?.id);
+		}
+
+		load();
+
+		// Configure realtime events
 		supabaseClient
 			.channel(`public:rolls`)
 			.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rolls' }, (payload) =>

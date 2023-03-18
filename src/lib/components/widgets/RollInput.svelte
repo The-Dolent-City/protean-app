@@ -4,7 +4,7 @@
 	import { channel } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
 	import { DiceRoll } from '@dice-roller/rpg-dice-roller';
-	import Textarea from '$lib/components/Textarea.svelte';
+	import Textarea from '$lib/components/inputs/Textarea.svelte';
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 
 	let value;

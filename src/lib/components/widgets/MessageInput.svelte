@@ -3,7 +3,7 @@
 	import { addMessage } from '$lib/api';
 	import { channel } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
-	import Textarea from '$lib/components/Textarea.svelte';
+	import Textarea from '$lib/components/inputs/Textarea.svelte';
 
 	let value;
 

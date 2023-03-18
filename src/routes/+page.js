@@ -7,4 +7,8 @@ export const load = async (event) => {
 	if (!session) {
 		throw redirect(303, '/auth');
 	}
+
+	return {
+		session
+	};
 };

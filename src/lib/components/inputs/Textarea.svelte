@@ -9,10 +9,8 @@
 	export let size = 'md';
 
 	$: css = new CssBuilder()
-		.addClass(
-			'peer appearance-none w-full rounded outline outline-1 outline-base-800 text-default cursor-text bg-base-900 resize-none'
-		)
-		.addClass('focus:bg-base-800 focus:outline-base-700 focus:caret-base-300 focus:text-focus')
+		.addClass('peer appearance-none w-full rounded text-focus bg-base-800 resize-none')
+		.addClass('outline outline-1 outline-base-800')
 		.addClass('placeholder:text-base-500')
 		.addClass('text-xs px-2 py-1.5', size === 'xs')
 		.addClass('text-sm px-2 py-1.5', size === 'sm')

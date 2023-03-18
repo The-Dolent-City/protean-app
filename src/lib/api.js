@@ -1,10 +1,10 @@
 /**
- * Get a single channel by id.
- * @param {number} channel_id
+ * Get a single channel by slug.
+ * @param {number} slug
  */
-export const getChannel = async (client, channel_id) => {
+export const getChannel = async (client, slug) => {
 	try {
-		let { data } = await client.from('channels').select(`*`).eq('id', channel_id).limit(1).single();
+		let { data } = await client.from('channels').select(`*`).eq('slug', slug).limit(1).single();
 		return data;
 	} catch (error) {
 		console.error(error);

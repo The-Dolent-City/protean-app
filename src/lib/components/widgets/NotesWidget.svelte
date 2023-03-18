@@ -5,7 +5,7 @@
 	import { channelNotes } from '$lib/stores/channel-store';
 	import Note from './Note.svelte';
 	import NotesInput from './NotesInput.svelte';
-	import Widget from '$lib/components/Widget.svelte';
+	import Widget from '$lib/components/widgets/Widget.svelte';
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 	import WarningAltFilled from 'carbon-icons-svelte/lib/WarningAltFilled.svelte';

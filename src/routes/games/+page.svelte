@@ -1,5 +1,16 @@
 <script>
+	import { onMount } from 'svelte';
+	import { user } from '$lib/stores/user-store';
+	import Header from '$lib/components/layout/Header.svelte';
+	import HeaderLink from '$lib/components/layout/HeaderLink.svelte';
+	import Main from '$lib/components/layout/Main.svelte';
+	import Persona from '$lib/components/persona/AccountPersona.svelte';
+
 	export let data;
+
+	onMount(() => {
+		$user = data?.user;
+	});
 </script>
 
 <svelte:head>
@@ -7,20 +18,35 @@
 	<meta name="description" content="Select an RPG to play with friends." />
 </svelte:head>
 
-{#if data?.channels}
-	{#each data.channels as channel}
-		<a
-			href={`/games/${channel.slug}?id=${channel.id}`}
-			class="col-span-full sm:col-span-6 md:col-span-4 self-start p-6 rounded-md border border-base-800 bg-base-900 hover:border-base-700 hover:bg-base-800 mst"
-		>
-			<h2 class="text-xl font-medium text-focus">
-				{channel.title}
-			</h2>
-			<p class="mt-2">
-				{channel.description}
-			</p>
-		</a>
-	{/each}
-{:else}
-	<h1>Unable to retrieve games</h1>
-{/if}
+<Header>
+	<div class="flex gap-2 items-center">
+		<HeaderLink href={`/`}>Protean</HeaderLink>
+		<span>/</span>
+		<HeaderLink href={`/games`} latest>Games</HeaderLink>
+	</div>
+	{#if $user}
+		<Persona />
+	{/if}
+</Header>
+<Main>
+	<div class="flex flex-col gap-4 p-6">
+		{#if data?.channels}
+			{#each data.channels as channel}
+				<div class="">
+					<a
+						href={`/games/${channel.slug}?id=${channel.id}`}
+						class="block text-xl font-semibold text-primary-400 decoration-2 decoration-primary-400 hover:underline mst"
+					>
+						{channel?.title}
+					</a>
+					<p class="mt-2">
+						{channel.description}
+					</p>
+				</div>
+				<hr class="border border-base-800" />
+			{/each}
+		{:else}
+			<h1>Unable to retrieve games</h1>
+		{/if}
+	</div>
+</Main>
