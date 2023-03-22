@@ -1,6 +1,7 @@
 <script>
 	import Time from 'svelte-time';
 
+	export let loading = false;
 	export let author;
 	export let message;
 	export let timestamp;
@@ -12,20 +13,33 @@
 		: 'Unknown user';
 </script>
 
-<div class="flex w-full px-4 gap-3 items-start overflow-hidden rounded-md text-default">
-	<div
-		class="flex-none flex w-10 h-10 mt-0.5 items-center justify-center rounded-full"
-		style:background-color={author?.color ? author.color : '#27272a'}
-	>
-		{#if author?.username && author.username?.length > 0}
-			<span class="text-focus uppercase">{author.username?.slice(0, 2)}</span>
-		{/if}
+{#if loading}
+	<div class="flex w-full px-4 gap-3 items-start overflow-hidden rounded-md text-default">
+		<div class="w-10 h-10 mt-0.5 rounded-full animate-pulse bg-base-800" />
+		<div class="flex-auto flex flex-col min-w-0">
+			<h3 class="align-baseline truncate">
+				<span class="h-4 mr-1 animate-pulse bg-base-800">{authorText}</span>
+				<span class="h-3 animate-pulse bg-base-800">{authorText}</span>
+			</h3>
+			<p class="h-4 animate-pulse bg-base-800">{message}</p>
+		</div>
 	</div>
-	<div class="flex-auto flex flex-col min-w-0">
-		<h3 class="align-baseline truncate">
-			<span class="mr-1 text-focus">{authorText}</span>
-			<Time relative {timestamp} class="text-xs text-less-focus" />
-		</h3>
-		<p class="text-default">{message}</p>
+{:else}
+	<div class="flex w-full px-4 gap-3 items-start overflow-hidden rounded-md text-default">
+		<div
+			class="flex-none flex w-10 h-10 mt-0.5 items-center justify-center rounded-full"
+			style:background-color={author?.color ? author.color : '#27272a'}
+		>
+			{#if author?.username && author.username?.length > 0}
+				<span class="text-focus uppercase">{author.username?.slice(0, 2)}</span>
+			{/if}
+		</div>
+		<div class="flex-auto flex flex-col min-w-0">
+			<h3 class="align-baseline truncate">
+				<span class="mr-1 text-focus">{authorText}</span>
+				<Time relative {timestamp} class="text-xs text-less-focus" />
+			</h3>
+			<p class="text-default">{message}</p>
+		</div>
 	</div>
-</div>
+{/if}

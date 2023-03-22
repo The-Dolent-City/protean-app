@@ -5,15 +5,11 @@
 	export let widget;
 	export let title;
 
-	let toggled = false;
-
 	function toggleWidget() {
 		if ($widgets?.find((w) => w === widget)) {
 			deactivateWidget();
-			toggled = false;
 		} else {
 			activateWidget();
-			toggled = true;
 		}
 	}
 
@@ -26,12 +22,13 @@
 	}
 
 	$: css = new CssBuilder()
-		.addClass('group flex p-2 items-center justify-center rounded-full border mst')
-		.addClass('border-primary-400 text-primary-400 bg-primary-900/25', toggled)
-		.addClass('hover:border-primary-300 text-primary-300 hover:bg-primary-900/50', toggled)
-		.addClass('border-base-950 bg-base-950', !toggled)
-		.addClass('hover:text-primary-400 hover:bg-primary-900/25', !toggled)
+		.addClass('group flex p-2 items-center justify-center rounded-lg mst')
+		.addClass('text-focus bg-base-800', toggled)
+		.addClass('text-less-focus bg-base-950 hover:text-focus hover:bg-base-800', !toggled)
 		.build();
+
+	$: toggled = $widgets.find((w) => w === widget) === undefined ? false : true;
+	$: console.log(toggled);
 </script>
 
 <button on:click={() => toggleWidget(widget)} class={css} {title}>

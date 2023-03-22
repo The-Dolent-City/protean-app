@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import { header } from '$lib/stores/header-store';
 	import { channel, channelMessages, channelNotes, channelRolls } from '$lib/stores/channel-store';
 	import { widgets } from '$lib/stores/widget-store';
@@ -29,18 +30,18 @@
 </svelte:head>
 
 <Header>
-	<div class="flex flex-wrap gap-1 items-center">
-		<HeaderLink href={`/`}>Protean</HeaderLink>
+	<div class="flex gap-1 items-center">
+		<HeaderLink href={`/`}>protean</HeaderLink>
 		<span class="text-base-600">/</span>
-		<HeaderLink href={`/games`}>Games</HeaderLink>
+		<HeaderLink href={`/games`}>games</HeaderLink>
 		<span class="text-base-600">/</span>
 		{#if $user}
-			<HeaderLink href={`/games/${$channel?.slug}?id=${$channel?.id}`}>
+			<HeaderLink>
 				{$channel?.slug}
 			</HeaderLink>
 		{:else}
 			<HeaderLink>
-				<div class="w-20 h-[1.875rem] rounded-full animate-pulse bg-base-800" />
+				<div class="w-20 h-[1.5rem] rounded-lg animate-pulse bg-base-800" />
 			</HeaderLink>
 		{/if}
 	</div>
@@ -50,19 +51,23 @@
 </Header>
 <Main>
 	<Sidebar />
-	<div class="grow grid grid-cols-2 w-full h-full gap-6 p-4 md:p-8 lg:p-12 items-stretch">
-		{#if $channel}
-			{#each $widgets as widget}
-				{#if widget === 'roll'}
-					<RollWidget />
-				{:else if widget === 'message'}
-					<!-- else if content here -->
-				{:else}
-					<!-- else content here -->
-				{/if}
-			{/each}
-		{:else}
-			<!-- else content here -->
-		{/if}
+	<div
+		class="grow grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 w-full h-full gap-6 p-6 md:p-8 items-stretch"
+	>
+		{#each $widgets as widget}
+			{#if widget === 'roll'}
+				{#await data?.streamed?.rolls}
+					<RollWidget loading rolls={null} />
+				{:then rolls}
+					<RollWidget {rolls} />
+				{:catch error}
+					<RollWidget {error} />
+				{/await}
+			{:else if widget === 'message'}
+				<!-- else if content here -->
+			{:else}
+				<!-- else content here -->
+			{/if}
+		{/each}
 	</div>
 </Main>

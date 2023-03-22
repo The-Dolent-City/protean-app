@@ -17,7 +17,7 @@
 		.addClass(
 			'peer appearance-none w-full rounded outline outline-1 outline-base-700 text-default cursor-text bg-inherit'
 		)
-		.addClass('focus:outline-2 focus:outline-primary-500 focus:caret-primary-500 focus:text-focus')
+		.addClass('focus:outline-base-600 focus:caret-base-600 focus:text-focus')
 		.addClass('placeholder:italic')
 		.addClass('text-xs px-2 py-1.5', size === 'xs')
 		.addClass('text-sm px-2 py-1.5', size === 'sm')

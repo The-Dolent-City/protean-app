@@ -1,13 +1,14 @@
 <script>
 	import { CssBuilder } from '$lib/builders/css-builder';
 
-	let link;
+	let link = null;
 	export { link as href };
 
 	$: css = new CssBuilder()
-		.addClass('px-2 py-0.5 rounded-full border border-base-950')
-		.addClass('text-base font-semibold tracking-tight text-focus')
-		.addClass('hover:border-primary-400 hover:text-primary-400 hover:bg-primary-900/25')
+		.addClass('px-2 py-0.5 rounded-lg truncate bg-base-950')
+		.addClass('text-base font-medium tracking-tight')
+		.addClass('text-less-focus hover:text-focus hover:bg-base-800', link)
+		.addClass('text-focus', !link)
 		.build();
 </script>
 

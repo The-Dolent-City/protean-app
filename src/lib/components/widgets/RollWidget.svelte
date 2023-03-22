@@ -1,22 +1,20 @@
 <script>
 	import { onMount } from 'svelte';
-	import { getRolls, getUser } from '$lib/api';
+	import { scrollToBottomAction } from 'svelte-legos';
+	import { getUser } from '$lib/api';
 	import { supabaseClient } from '$lib/db';
-	import { channel, channelRolls } from '$lib/stores/channel-store';
+	import { channelRolls } from '$lib/stores/channel-store';
 	import Widget from '$lib/components/widgets/Widget.svelte';
 	import Roll from '$lib/components/widgets/Roll.svelte';
 	import RollInput from '$lib/components/widgets/RollInput.svelte';
 	import WarningAltFilled from 'carbon-icons-svelte/lib/WarningAltFilled.svelte';
 
-	/** Setup realtime */
+	/** Variables */
+	export let loading = false;
+	export let rolls = null;
+
+	/** Initialization */
 	onMount(() => {
-		async function load() {
-			$channelRolls = await getRolls(supabaseClient, $channel?.id);
-		}
-
-		load();
-
-		// Configure realtime events
 		supabaseClient
 			.channel(`public:rolls`)
 			.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rolls' }, (payload) =>
@@ -34,15 +32,25 @@
 		}
 	}
 
-	$: loading = !Array.isArray($channelRolls);
+	$: $channelRolls = rolls;
 </script>
 
-<Widget
-	header="Rolls"
-	class="col-span-full sm:col-span-6 lg:col-span-4 row-span-4 overflow-hidden"
-	{loading}
->
-	{#if $channelRolls}
+<Widget header="Rolls" class="overflow-hidden" {loading}>
+	{#if loading}
+		<div use:scrollToBottomAction class="flex-auto overflow-y-auto [overflow-anchor:auto]">
+			<div class="flex-auto flex flex-col-reverse gap-6 py-3 [overflow-anchor:none]">
+				{#each Array(16) as _, i}
+					<Roll loading />
+				{/each}
+			</div>
+			<pre class="invisible flex-none w-full min-h-[1px] [overflow-anchor:auto]" />
+		</div>
+		<div class="flex-none w-full p-3 border-b border-base-800 bg-base-900">
+			<div
+				class="w-full h-[4.3125rem] rounded-lg outline outline-1 outline-base-700 bg-base-800 animate-pulse"
+			/>
+		</div>
+	{:else if $channelRolls}
 		{#if $channelRolls.length === 0}
 			<div class="grow flex p-4 items-center justify-center">
 				<div class="flex flex-col gap-2 items-center">
@@ -52,9 +60,9 @@
 			</div>
 			<RollInput />
 		{:else}
-			<div class="flex-auto overflow-y-auto [overflow-anchor:auto]">
+			<div use:scrollToBottomAction class="flex-auto overflow-y-auto [overflow-anchor:auto]">
 				<div class="flex-auto flex flex-col-reverse gap-6 py-3 [overflow-anchor:none]">
-					{#each $channelRolls as roll, i (roll.id)}
+					{#each $channelRolls as roll, i (roll?.id)}
 						<Roll author={roll?.author} result={roll?.result} timestamp={roll?.inserted_at} />
 					{/each}
 				</div>

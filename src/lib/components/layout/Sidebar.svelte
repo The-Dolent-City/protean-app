@@ -4,7 +4,7 @@
 	import SidebarWidgetToggle from './SidebarWidgetToggle.svelte';
 </script>
 
-<div class="flex flex-col h-full gap-2 px-3 py-5 border-r border-base-800">
+<div class="flex flex-col h-full gap-2 px-2 py-4 border-r border-base-800">
 	<SidebarWidgetToggle widget="roll" title="Dice roller">
 		<GameConsole size={20} />
 	</SidebarWidgetToggle>

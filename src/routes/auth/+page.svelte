@@ -1,5 +1,5 @@
 <script>
-	import Textfield from '$lib/components/Textfield.svelte';
+	import Textfield from '$lib/components/inputs/Textfield.svelte';
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 	import Email from 'carbon-icons-svelte/lib/Email.svelte';
 	import Login from 'carbon-icons-svelte/lib/Login.svelte';

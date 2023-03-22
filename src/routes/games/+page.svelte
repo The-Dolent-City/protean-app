@@ -19,10 +19,10 @@
 </svelte:head>
 
 <Header>
-	<div class="flex gap-2 items-center">
-		<HeaderLink href={`/`}>Protean</HeaderLink>
+	<div class="flex gap-1 items-center">
+		<HeaderLink href={`/`}>protean</HeaderLink>
 		<span>/</span>
-		<HeaderLink href={`/games`} latest>Games</HeaderLink>
+		<HeaderLink>games</HeaderLink>
 	</div>
 	{#if $user}
 		<Persona />
@@ -34,7 +34,7 @@
 			{#each data.channels as channel}
 				<div class="">
 					<a
-						href={`/games/${channel.slug}?id=${channel.id}`}
+						href={`/games/${channel.slug}`}
 						class="block text-xl font-semibold text-primary-400 decoration-2 decoration-primary-400 hover:underline mst"
 					>
 						{channel?.title}
