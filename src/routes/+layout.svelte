@@ -4,7 +4,7 @@
 	import { redirect } from '@sveltejs/kit';
 	import { supabaseClient } from '$lib/db';
 	import { invalidate } from '$app/navigation';
-	import Container from './Container.svelte';
+	import Container from '$lib/components/layout/Container.svelte';
 
 	onMount(() => {
 		const {

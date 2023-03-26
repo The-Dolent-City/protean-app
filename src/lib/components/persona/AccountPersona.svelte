@@ -2,10 +2,10 @@
 	import { redirect } from '@sveltejs/kit';
 	import { supabaseClient } from '$lib/db';
 	import { user } from '$lib/stores/user-store';
-	import Persona from '$lib/components/Persona.svelte';
-	import AccountPersonaForm from './AccountPersonaForm.svelte';
+	import Persona from '$lib/components/persona/Persona.svelte';
+	import AccountPersonaForm from '$lib/components/persona/AccountPersonaForm.svelte';
+	import Popover from '$lib/components/surfaces/Popover.svelte';
 	import Logout from 'carbon-icons-svelte/lib/Logout.svelte';
-	import Popover from '../lib/components/Popover.svelte';
 
 	let open = false;
 

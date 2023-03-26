@@ -1,18 +1,18 @@
 <script>
+	import { textareaAutosizeAction } from 'svelte-legos';
 	import { CssBuilder } from '$lib/builders/css-builder';
 
-	let className;
+	let className = null;
 	export { className as class };
 	export let onkeydown = () => {};
-	export let label;
 	export let value;
 	export let size = 'md';
 
 	$: css = new CssBuilder()
 		.addClass(
-			'peer appearance-none w-full rounded outline outline-1 outline-base-800 text-default cursor-text bg-base-900 resize-none'
+			'peer appearance-none w-full rounded-lg leading-normal text-focus bg-base-800 resize-none'
 		)
-		.addClass('focus:bg-base-800 focus:outline-base-700 focus:caret-base-300 focus:text-focus')
+		.addClass('outline outline-1 outline-base-700')
 		.addClass('placeholder:text-base-500')
 		.addClass('text-xs px-2 py-1.5', size === 'xs')
 		.addClass('text-sm px-2 py-1.5', size === 'sm')
@@ -30,9 +30,4 @@
 	};
 </script>
 
-<label class="block relative w-full max-w-full cursor-pointer">
-	{#if label}
-		<div class="mb-1 text-sm truncate">{label}</div>
-	{/if}
-	<textarea bind:value on:keydown={keydown} cols="3" class={css} {...$$restProps} />
-</label>
+<textarea bind:value on:keydown={keydown} cols={2} class={css} {...$$restProps} />

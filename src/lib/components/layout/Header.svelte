@@ -1,0 +1,9 @@
+<script>
+	import { header } from '$lib/stores/header-store';
+</script>
+
+<header
+	class="fixed z-30 left-0 right-0 top-0 flex h-16 gap-8 pl-2 pr-4 py-4 items-center justify-between overflow-hidden border-b border-base-800"
+>
+	<slot />
+</header>

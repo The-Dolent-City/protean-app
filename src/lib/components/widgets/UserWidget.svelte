@@ -3,7 +3,7 @@
 	import { supabaseClient } from '$lib/db';
 	import { channelMessages, channelRolls, channelUsers, presence } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
-	import Widget from '$lib/components/Widget.svelte';
+	import Widget from '$lib/components/widgets/Widget.svelte';
 	import UserPersona from '$lib/components/widgets/UserPersona.svelte';
 
 	/** Setup presence */

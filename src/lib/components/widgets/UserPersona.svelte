@@ -1,6 +1,6 @@
 <script>
-	import Persona from '$lib/components/Persona.svelte';
-	import Popover from '$lib/components/Popover.svelte';
+	import Persona from '$lib/components/persona/Persona.svelte';
+	import Popover from '$lib/components/surfaces/Popover.svelte';
 
 	export let user;
 

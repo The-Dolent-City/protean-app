@@ -7,14 +7,14 @@
 	export let header;
 
 	$: wrapperCss = new CssBuilder()
-		.addClass('flex flex-col rounded-md border border-base-800 bg-base-900')
+		.addClass('flex-1 flex flex-col rounded-lg border border-base-800 bg-base-900')
 		.addClass('animate-pulse', loading)
 		.addClass(className, className)
 		.build();
 </script>
 
 <div tabindex="-1" class={wrapperCss}>
-	<h3 class="flex-none p-3 text-sm text-focus truncate border-b border-base-800">
+	<h3 class="flex-none p-3 text-sm font-medium text-focus truncate border-b border-base-800">
 		{header}
 	</h3>
 	{#if loading}

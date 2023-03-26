@@ -32,6 +32,7 @@
 	"dependencies": {
 		"@dice-roller/rpg-dice-roller": "^5.2.1",
 		"@fontsource/inter": "^4.5.15",
-		"@supabase/auth-helpers-sveltekit": "^0.8.6"
+		"@supabase/auth-helpers-sveltekit": "^0.8.6",
+		"svelte-legos": "^0.1.3"
 	}
 }
