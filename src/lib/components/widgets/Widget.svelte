@@ -14,9 +14,7 @@
 </script>
 
 <div tabindex="-1" class={wrapperCss}>
-	<h3
-		class="flex-none p-3 text-xl tracking-tight font-semibold text-focus truncate border-b border-base-800"
-	>
+	<h3 class="flex-none p-3 text-sm font-medium text-focus truncate border-b border-base-800">
 		{header}
 	</h3>
 	{#if loading}

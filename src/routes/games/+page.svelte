@@ -35,6 +35,7 @@
 				<div class="">
 					<a
 						href={`/games/${channel.slug}`}
+						data-sveltekit-preload-data="tap"
 						class="block text-xl font-semibold text-primary-400 decoration-2 decoration-primary-400 hover:underline mst"
 					>
 						{channel?.title}

@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store';
 
-export const widgets = writable(['roll']);
+export const widgets = writable(['message', 'roll']);

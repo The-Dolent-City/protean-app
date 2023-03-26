@@ -9,9 +9,6 @@ export const load = async (event) => {
 		throw redirect(303, '/auth');
 	}
 
-	// const channel = await getChannel(supabaseClient, event.params.slug);
-	// const user = await getUser(supabaseClient, session?.user?.id);
-
 	const [channel, user] = await Promise.all([
 		await getChannel(supabaseClient, event.params.slug),
 		await getUser(supabaseClient, session?.user?.id)
@@ -20,9 +17,6 @@ export const load = async (event) => {
 	return {
 		header: event.params.slug,
 		channel,
-		user,
-		streamed: {
-			rolls: getRolls(supabaseClient, channel?.id)
-		}
+		user
 	};
 };

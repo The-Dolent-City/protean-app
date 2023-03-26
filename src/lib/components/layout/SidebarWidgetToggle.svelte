@@ -28,7 +28,6 @@
 		.build();
 
 	$: toggled = $widgets.find((w) => w === widget) === undefined ? false : true;
-	$: console.log(toggled);
 </script>
 
 <button on:click={() => toggleWidget(widget)} class={css} {title}>

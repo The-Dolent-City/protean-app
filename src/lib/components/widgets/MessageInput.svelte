@@ -1,7 +1,7 @@
 <script>
+	import { page } from '$app/stores';
 	import { supabaseClient } from '$lib/db';
 	import { addMessage } from '$lib/api';
-	import { channel } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
 	import Textarea from '$lib/components/inputs/Textarea.svelte';
 
@@ -9,7 +9,7 @@
 
 	async function submitOnEnter(event) {
 		if (event.key === 'Enter' && validate()) {
-			await addMessage(supabaseClient, value, $channel.id, $user.id);
+			await addMessage(supabaseClient, value, $page?.data?.channel?.id, $user.id);
 			value = '';
 		}
 	}

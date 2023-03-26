@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { header } from '$lib/stores/header-store';
-	import { channel, channelMessages, channelNotes, channelRolls } from '$lib/stores/channel-store';
 	import { widgets } from '$lib/stores/widget-store';
 	import { user } from '$lib/stores/user-store';
 	import Header from '$lib/components/layout/Header.svelte';
@@ -10,19 +9,19 @@
 	import Main from '$lib/components/layout/Main.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
 	import Persona from '$lib/components/persona/AccountPersona.svelte';
+	import MessageWidget from '$lib/components/widgets/MessageWidget.svelte';
 	import RollWidget from '$lib/components/widgets/RollWidget.svelte';
 
 	export let data;
 
 	onMount(() => {
 		$header = data?.header;
-		$channel = data?.channel;
 		$user = data?.user;
 	});
 </script>
 
 <svelte:head>
-	<title>Protean | {$header}</title>
+	<title>Protean | {data?.header ? data.header : 'Game'}</title>
 	<meta
 		name="description"
 		content="Play RPGs in realtime with friends using the widgets provided on this page."
@@ -37,7 +36,7 @@
 		<span class="text-base-600">/</span>
 		{#if $user}
 			<HeaderLink>
-				{$channel?.slug}
+				{$page?.data?.channel?.slug}
 			</HeaderLink>
 		{:else}
 			<HeaderLink>
@@ -54,20 +53,16 @@
 	<div
 		class="grow grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 w-full h-full gap-6 p-6 md:p-8 items-stretch"
 	>
-		{#each $widgets as widget}
-			{#if widget === 'roll'}
-				{#await data?.streamed?.rolls}
-					<RollWidget loading rolls={null} />
-				{:then rolls}
-					<RollWidget {rolls} />
-				{:catch error}
-					<RollWidget {error} />
-				{/await}
-			{:else if widget === 'message'}
-				<!-- else if content here -->
-			{:else}
-				<!-- else content here -->
-			{/if}
-		{/each}
+		{#if $page?.data?.channel?.id}
+			{#each $widgets as widget}
+				{#if widget === 'roll'}
+					<RollWidget />
+				{:else if widget === 'message'}
+					<MessageWidget />
+				{:else}
+					<!-- else content here -->
+				{/if}
+			{/each}
+		{/if}
 	</div>
 </Main>
