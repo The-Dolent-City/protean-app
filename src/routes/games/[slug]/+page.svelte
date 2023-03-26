@@ -29,7 +29,7 @@
 </svelte:head>
 
 <Header>
-	<div class="flex gap-1 items-center">
+	<div class="shrink flex gap-1 items-center overflow-hidden">
 		<HeaderLink href={`/`}>protean</HeaderLink>
 		<span class="text-base-600">/</span>
 		<HeaderLink href={`/games`}>games</HeaderLink>
@@ -50,9 +50,7 @@
 </Header>
 <Main>
 	<Sidebar />
-	<div
-		class="grow grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 w-full h-full gap-6 p-6 md:p-8 items-stretch"
-	>
+	<div class="grow flex flex-col md:flex-row w-full h-full gap-6 p-6 md:p-8 items-stretch">
 		{#if $page?.data?.channel?.id}
 			{#each $widgets as widget}
 				{#if widget === 'roll'}

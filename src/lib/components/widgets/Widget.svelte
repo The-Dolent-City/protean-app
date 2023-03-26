@@ -7,7 +7,7 @@
 	export let header;
 
 	$: wrapperCss = new CssBuilder()
-		.addClass('flex flex-col rounded-lg border border-base-800 bg-base-900')
+		.addClass('flex-1 flex flex-col rounded-lg border border-base-800 bg-base-900')
 		.addClass('animate-pulse', loading)
 		.addClass(className, className)
 		.build();
