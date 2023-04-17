@@ -1,26 +1,30 @@
-@import "@fontsource/inter/variable.css";
+@import '@fontsource/inter/variable.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
-  .text-less-focus {
-    @apply text-base-500;
-  }
-  .text-default {
-    @apply text-base-400;
-  }
-  .text-focus {
-    @apply text-base-300;
-  }
+	.text-less-focus {
+		@apply text-base-600;
+	}
+	.text-default {
+		@apply text-base-500;
+	}
+	.text-focus {
+		@apply text-base-300;
+	}
 }
 
 @layer utilities {
-  .acc-focus {
-    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-black dark:focus-visible:outline-white;
-  }
-  .mst {
-    @apply motion-safe:transition motion-safe:duration-150 motion-safe:ease-in-out;
-  }
+	.acc-focus {
+		@apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-black dark:focus-visible:outline-white;
+	}
+	.mst {
+		@apply motion-safe:transition motion-safe:duration-150 motion-safe:ease-in-out;
+	}
+}
+
+:root {
+	color-scheme: dark;
 }

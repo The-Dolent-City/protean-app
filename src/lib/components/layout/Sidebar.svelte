@@ -1,6 +1,7 @@
 <script>
-	import GameConsole from 'carbon-icons-svelte/lib/GameConsole.svelte';
 	import Chat from 'carbon-icons-svelte/lib/Chat.svelte';
+	import GameConsole from 'carbon-icons-svelte/lib/GameConsole.svelte';
+	import UserProfileAlt from 'carbon-icons-svelte/lib/UserProfileAlt.svelte';
 	import SidebarWidgetToggle from './SidebarWidgetToggle.svelte';
 </script>
 
@@ -10,5 +11,8 @@
 	</SidebarWidgetToggle>
 	<SidebarWidgetToggle widget="message" title="Messages">
 		<Chat size={20} />
+	</SidebarWidgetToggle>
+	<SidebarWidgetToggle widget="user" title="Active users">
+		<UserProfileAlt size={20} />
 	</SidebarWidgetToggle>
 </div>

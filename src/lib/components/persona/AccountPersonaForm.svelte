@@ -12,16 +12,16 @@
 	let formNickname;
 	let formColor;
 	const colors = [
-		'#b91c1c',
-		'#ea580c',
-		'#fbbf24',
-		'#15803d',
-		'#0f766e',
-		'#0284c7',
-		'#1d4ed8',
-		'#6d28d9',
-		'#a21caf',
-		'#be185d'
+		'#7f1d1d',
+		'#9a3412',
+		'#b45309',
+		'#14532d',
+		'#134e4a',
+		'#0c4a6e',
+		'#1e3a8a',
+		'#4c1d95',
+		'#701a75',
+		'#831843'
 	];
 	let submitting = false;
 	let error;

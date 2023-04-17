@@ -18,6 +18,13 @@
 	onMount(async () => {
 		if ($page.data?.channel?.id && active) {
 			await load();
+
+			supabaseClient
+				.channel(`public:rolls`)
+				.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rolls' }, (payload) =>
+					onInsertRoll(payload?.new)
+				)
+				.subscribe();
 		}
 	});
 
@@ -27,20 +34,16 @@
 
 		$channelRolls = await getRolls(supabaseClient, $page.data?.channel?.id);
 
-		supabaseClient
-			.channel(`public:rolls`)
-			.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rolls' }, (payload) =>
-				onInsertRoll(payload.new)
-			)
-			.subscribe();
-
 		loading = false;
 	}
 
 	async function onInsertRoll(roll) {
+		console.log(roll);
 		if (roll && roll.channel_id === $page?.data?.channel?.id) {
 			let author = await getUser(supabaseClient, roll.user_id);
-			roll.author = author;
+			if (author) {
+				roll.author = author;
+			}
 			$channelRolls = [roll, ...$channelRolls];
 		}
 	}
@@ -58,10 +61,8 @@
 			</div>
 			<pre class="invisible flex-none w-full min-h-[1px] [overflow-anchor:auto]" />
 		</div>
-		<div class="flex-none w-full p-3 border-b border-base-800 bg-base-900">
-			<div
-				class="w-full h-[4.3125rem] rounded-lg outline outline-1 outline-base-700 bg-base-800 animate-pulse"
-			/>
+		<div class="flex-none w-full p-3">
+			<div class="w-full h-[3.375rem] rounded-lg bg-base-900 animate-pulse" />
 		</div>
 	{:else if $channelRolls}
 		{#if $channelRolls.length === 0}

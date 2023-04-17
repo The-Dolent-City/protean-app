@@ -28,7 +28,7 @@
 		<Persona
 			slot="trigger"
 			onclick={toggleOpen}
-			letters={$user?.username?.slice(0, 2)}
+			letters={$user?.username?.slice(0, 1)}
 			color={$user?.color}
 		/>
 		<svelte:fragment slot="content">

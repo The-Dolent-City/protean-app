@@ -10,14 +10,14 @@
 {#if loading}
 	<div
 		transition:fade|local={{ duration: 500 }}
-		class="flex-none flex w-10 h-10 items-center justify-center rounded-full animate-pulse"
+		class="flex-none flex w-8 h-8 items-center justify-center rounded-full animate-pulse"
 		style:background-color={'#27272a'}
 	/>
 {:else if onclick}
 	<button
 		on:click={onclick}
 		transition:fade|local={{ duration: 500 }}
-		class="flex-none flex w-10 h-10 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-100"
+		class="flex-none flex w-8 h-8 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-80"
 		style:background-color={color}
 	>
 		<span class="text-focus uppercase">{letters}</span>
@@ -25,7 +25,7 @@
 {:else}
 	<div
 		transition:fade|local={{ duration: 500 }}
-		class="flex-none flex w-10 h-10 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-100"
+		class="flex-none flex w-8 h-8 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-100"
 		style:background-color={color}
 	>
 		<span class="text-focus uppercase">{letters}</span>
