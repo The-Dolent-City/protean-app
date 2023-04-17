@@ -5,6 +5,7 @@
 	import { user } from '$lib/stores/user-store';
 	import Widget from '$lib/components/widgets/Widget.svelte';
 	import UserPersona from '$lib/components/widgets/UserPersona.svelte';
+	import Persona from '../persona/Persona.svelte';
 
 	/** Setup presence */
 	onMount(() => {
@@ -58,23 +59,24 @@
 	});
 </script>
 
-{#if $user && $channelUsers}
-	<Widget
-		header="Active users"
-		class="col-span-full sm:col-span-6 lg:col-span-4 2xl:col-span-4 row-span-1"
-	>
-		<div class="flex flex-wrap w-full min-h-[4rem] p-3 gap-3">
+<Widget header="Active users" class="overflow-hidden">
+	{#if $user && $channelUsers}
+		<div class="flex flex-wrap w-full gap-6 lg:gap-3 p-3">
 			{#each $channelUsers as user}
-				<UserPersona {user} />
+				<div class="flex max-w-full gap-3 pb-2 items-start">
+					<Persona letters={user?.username?.slice(0, 1)} color={user?.color} />
+					<div class="flex-shrink flex flex-col truncate">
+						<h3 class="text-focus truncate">
+							{user?.nickname}
+						</h3>
+						<h4 class="text-sm truncate">
+							{user?.username}
+						</h4>
+					</div>
+				</div>
 			{/each}
 		</div>
-	</Widget>
-{:else}
-	<Widget
-		header="Active users"
-		class="col-span-full sm:col-span-6 lg:col-span-4 2xl:col-span-4 row-span-1"
-		loading
-	>
+	{:else}
 		<div class="relative flex-auto min-h-[4rem]" />
-	</Widget>
-{/if}
+	{/if}
+</Widget>

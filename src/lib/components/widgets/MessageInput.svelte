@@ -19,6 +19,6 @@
 	}
 </script>
 
-<div class="flex-none w-full p-3 border-b border-base-800 bg-base-900">
+<div class="flex-none w-full p-3">
 	<Textarea bind:value onkeydown={submitOnEnter} placeholder="Send a message" size="sm" />
 </div>

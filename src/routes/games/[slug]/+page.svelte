@@ -11,6 +11,7 @@
 	import Persona from '$lib/components/persona/AccountPersona.svelte';
 	import MessageWidget from '$lib/components/widgets/MessageWidget.svelte';
 	import RollWidget from '$lib/components/widgets/RollWidget.svelte';
+	import UserWidget from '$lib/components/widgets/UserWidget.svelte';
 
 	export let data;
 
@@ -29,11 +30,11 @@
 </svelte:head>
 
 <Header>
-	<div class="shrink flex gap-1 items-center overflow-hidden">
+	<div class="shrink flex gap-1 items-center">
 		<HeaderLink href={`/`}>protean</HeaderLink>
-		<span class="text-base-600">/</span>
+		<span class="text-base-700 cursor-default">/</span>
 		<HeaderLink href={`/games`}>games</HeaderLink>
-		<span class="text-base-600">/</span>
+		<span class="text-base-700 cursor-default">/</span>
 		{#if $user}
 			<HeaderLink>
 				{$page?.data?.channel?.slug}
@@ -50,13 +51,17 @@
 </Header>
 <Main>
 	<Sidebar />
-	<div class="grow flex flex-col md:flex-row w-full h-full gap-6 p-6 md:p-8 items-stretch">
+	<div
+		class="grow flex flex-col lg:flex-row w-full h-full gap-6 p-6 lg:p-8 items-stretch overflow-x-auto"
+	>
 		{#if $page?.data?.channel?.id}
 			{#each $widgets as widget}
 				{#if widget === 'roll'}
 					<RollWidget />
 				{:else if widget === 'message'}
 					<MessageWidget />
+				{:else if widget === 'user'}
+					<UserWidget />
 				{:else}
 					<!-- else content here -->
 				{/if}

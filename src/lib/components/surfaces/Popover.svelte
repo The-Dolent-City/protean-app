@@ -9,13 +9,13 @@
 
 	$: css = new CssBuilder()
 		.addClass(
-			'absolute z-20 top-[150%] px-6 py-4 text-sm rounded-md shadow-2xl border border-base-800 bg-base-900'
+			'absolute z-20 top-[160%] px-6 py-4 text-sm rounded-md shadow-2xl border border-base-700 bg-base-950'
 		)
 		.addClass(
-			"after:content-[''] after:absolute after:-top-[28px] after:border-[14px] after:border-transparent after:border-b-base-900"
+			"after:content-[''] after:absolute after:-top-[24px] after:border-[12px] after:border-transparent after:border-b-base-950"
 		)
 		.addClass(
-			"before:content-[''] before:absolute before:-top-[29px] before:border-[14px] before:border-transparent before:border-b-base-800"
+			"before:content-[''] before:absolute before:-top-[25px] before:border-[12px] before:border-transparent before:border-b-base-700"
 		)
 		.addClass('-left-2 after:left-3 before:left-3', position === 'left')
 		.addClass('-right-2 after:right-3 before:right-3', position === 'right')

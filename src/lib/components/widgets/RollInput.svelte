@@ -30,7 +30,7 @@
 	}
 </script>
 
-<div class="flex-none w-full p-3 border-b border-base-800 bg-base-900">
+<div class="flex-none w-full p-3">
 	<Textarea bind:value onkeydown={submitOnEnter} placeholder="Roll dice, ex: 2d6 + 10" size="sm" />
 	{#if error}
 		<div class="flex w-full mt-4 gap-2 items-start">

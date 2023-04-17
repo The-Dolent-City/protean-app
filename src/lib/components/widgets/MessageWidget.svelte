@@ -18,6 +18,15 @@
 	onMount(async () => {
 		if ($page.data?.channel?.id && active) {
 			await load();
+
+			supabaseClient
+				.channel(`public:messages`)
+				.on(
+					'postgres_changes',
+					{ event: 'INSERT', schema: 'public', table: 'messages' },
+					(payload) => onInsertMessage(payload.new)
+				)
+				.subscribe();
 		}
 	});
 
@@ -26,13 +35,6 @@
 		loading = true;
 
 		$channelMessages = await getMessages(supabaseClient, $page.data?.channel?.id);
-
-		supabaseClient
-			.channel(`public:messages`)
-			.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rolls' }, (payload) =>
-				onInsertMessage(payload.new)
-			)
-			.subscribe();
 
 		loading = false;
 	}
@@ -50,7 +52,7 @@
 
 <Widget header="Messages" class="overflow-hidden">
 	{#if loading}
-		<div class="flex-auto overflow-y-auto [overflow-anchor:auto]">
+		<div class="flex-auto overflow-y-auto [overflow-anchor:auto]" style:colorScheme="dark">
 			<div class="flex-auto flex flex-col-reverse gap-6 py-3 [overflow-anchor:none]">
 				{#each Array(16) as _, i}
 					<Message loading />
@@ -58,10 +60,8 @@
 			</div>
 			<pre class="invisible flex-none w-full min-h-[1px] [overflow-anchor:auto]" />
 		</div>
-		<div class="flex-none w-full p-3 border-b border-base-800 bg-base-900">
-			<div
-				class="w-full h-[4.3125rem] rounded-lg outline outline-1 outline-base-700 bg-base-800 animate-pulse"
-			/>
+		<div class="flex-none w-full p-3">
+			<div class="w-full h-[3.375rem] rounded-lg bg-base-900 animate-pulse" />
 		</div>
 	{:else if $channelMessages}
 		{#if $channelMessages.length === 0}
@@ -73,7 +73,11 @@
 			</div>
 			<MessageInput />
 		{:else}
-			<div use:scrollToBottomAction class="flex-auto overflow-y-auto [overflow-anchor:auto]">
+			<div
+				use:scrollToBottomAction
+				class="flex-auto overflow-y-auto [overflow-anchor:auto]"
+				style:colorScheme="dark"
+			>
 				<div class="flex-auto flex flex-col-reverse gap-6 py-3 [overflow-anchor:none]">
 					{#each $channelMessages as message, i (message?.id)}
 						<Message

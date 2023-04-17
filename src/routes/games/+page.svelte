@@ -21,7 +21,7 @@
 <Header>
 	<div class="flex gap-1 items-center">
 		<HeaderLink href={`/`}>protean</HeaderLink>
-		<span>/</span>
+		<span class="text-base-700 cursor-default">/</span>
 		<HeaderLink>games</HeaderLink>
 	</div>
 	{#if $user}
@@ -29,14 +29,13 @@
 	{/if}
 </Header>
 <Main>
-	<div class="flex flex-col gap-4 p-6">
+	<div class="flex flex-col w-full gap-4 p-6">
 		{#if data?.channels}
 			{#each data.channels as channel}
-				<div class="">
+				<div class="max-w-xl">
 					<a
 						href={`/games/${channel.slug}`}
-						data-sveltekit-preload-data="tap"
-						class="block text-xl font-semibold text-primary-400 decoration-2 decoration-primary-400 hover:underline mst"
+						class="inline text-xl font-semibold text-focus decoration-2 decoration-base-300 hover:underline mst"
 					>
 						{channel?.title}
 					</a>
@@ -44,7 +43,7 @@
 						{channel.description}
 					</p>
 				</div>
-				<hr class="border border-base-800" />
+				<hr class="w-full border border-base-800" />
 			{/each}
 		{:else}
 			<h1>Unable to retrieve games</h1>
