@@ -52,7 +52,7 @@
 <Main>
 	<Sidebar />
 	<div
-		class="grow flex flex-col md:flex-row w-full h-full gap-6 p-6 md:p-8 items-stretch overflow-x-auto"
+		class="grow flex flex-col lg:flex-row w-full h-full gap-6 p-6 lg:p-8 items-stretch overflow-x-auto"
 	>
 		{#if $page?.data?.channel?.id}
 			{#each $widgets as widget}

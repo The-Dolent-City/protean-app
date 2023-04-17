@@ -17,7 +17,7 @@
 	<button
 		on:click={onclick}
 		transition:fade|local={{ duration: 500 }}
-		class="flex-none flex w-8 h-8 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-80"
+		class="flex-none flex w-8 h-8 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-100"
 		style:background-color={color}
 	>
 		<span class="text-focus uppercase">{letters}</span>

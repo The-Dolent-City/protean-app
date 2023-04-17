@@ -38,7 +38,6 @@
 	}
 
 	async function onInsertRoll(roll) {
-		console.log(roll);
 		if (roll && roll.channel_id === $page?.data?.channel?.id) {
 			let author = await getUser(supabaseClient, roll.user_id);
 			if (author) {

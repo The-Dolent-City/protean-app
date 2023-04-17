@@ -61,15 +61,15 @@
 
 <Widget header="Active users" class="overflow-hidden">
 	{#if $user && $channelUsers}
-		<div class="flex flex-wrap w-full min-h-[4rem] gap-3 p-3">
+		<div class="flex flex-wrap w-full gap-6 lg:gap-3 p-3">
 			{#each $channelUsers as user}
-				<div class="flex gap-3 pb-2 items-start">
+				<div class="flex max-w-full gap-3 pb-2 items-start">
 					<Persona letters={user?.username?.slice(0, 1)} color={user?.color} />
-					<div class="flex flex-col">
-						<h3 class="text-focus">
+					<div class="flex-shrink flex flex-col truncate">
+						<h3 class="text-focus truncate">
 							{user?.nickname}
 						</h3>
-						<h4 class="text-sm">
+						<h4 class="text-sm truncate">
 							{user?.username}
 						</h4>
 					</div>

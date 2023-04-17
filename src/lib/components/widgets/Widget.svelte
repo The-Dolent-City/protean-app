@@ -1,5 +1,4 @@
 <script>
-	import { fade } from 'svelte/transition';
 	import { CssBuilder } from '$lib/builders/css-builder';
 
 	let className = '';
