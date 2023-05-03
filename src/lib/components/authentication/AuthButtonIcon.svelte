@@ -5,7 +5,7 @@
 	export { className as class };
 
 	$: css = new CssBuilder()
-		.addClass('flex p-1.5 items-center justify-center rounded-full text-white')
+		.addClass('flex items-center justify-center rounded-full text-black')
 		.addClass(className, className)
 		.build();
 </script>

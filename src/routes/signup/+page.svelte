@@ -11,16 +11,13 @@
 </script>
 
 <svelte:head>
-	<title>Protean | Auth</title>
-	<meta
-		name="description"
-		content="Login, signup, or change your password for the Protean web app."
-	/>
+	<title>Protean | Sign up</title>
+	<meta name="description" content="Sign up and create an account for the Protean web app." />
 </svelte:head>
 
 <div class="flex w-full h-full p-6 items-center justify-center">
-	<AuthForm action="?/signin" error={form?.error} notification={form?.message}>
-		<svelte:fragment slot="title">Authentication</svelte:fragment>
+	<AuthForm error={form?.error} notification={form?.message}>
+		<svelte:fragment slot="title">Sign up</svelte:fragment>
 		<svelte:fragment slot="fields">
 			<Textfield
 				id="email"
@@ -43,23 +40,18 @@
 		</svelte:fragment>
 		<svelte:fragment slot="buttons">
 			<AuthButton>
-				<AuthButtonIcon slot="icon" class="bg-green-600">
-					<Login size={20} />
-				</AuthButtonIcon>
-				<svelte:fragment slot="text">Sign in</svelte:fragment>
+				<svelte:fragment slot="text">Create account</svelte:fragment>
 			</AuthButton>
-			<AuthButton formaction="?/signup">
-				<AuthButtonIcon slot="icon" class="bg-blue-600">
-					<Email size={20} />
-				</AuthButtonIcon>
-				<svelte:fragment slot="text">Sign up</svelte:fragment>
-			</AuthButton>
-			<AuthButton href="/auth/reset-password">
-				<AuthButtonIcon slot="icon" class="bg-base-600">
-					<Password size={20} />
-				</AuthButtonIcon>
-				<svelte:fragment slot="text">Reset password</svelte:fragment>
-			</AuthButton>
+			<hr class="my-6 border-t border-base-800" />
+			<div class="flex gap-1 items-center text-sm">
+				<p>Already have an account?</p>
+				<a
+					href="/signin"
+					class="block text-center rounded text-primary-500 hover:underline focus:underline focus:outline-none"
+				>
+					Sign in
+				</a>
+			</div>
 		</svelte:fragment>
 	</AuthForm>
 </div>

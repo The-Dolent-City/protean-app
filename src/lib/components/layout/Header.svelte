@@ -2,8 +2,6 @@
 	import { header } from '$lib/stores/header-store';
 </script>
 
-<header
-	class="fixed z-30 left-0 right-0 top-0 flex h-14 gap-8 pl-2 pr-4 items-center justify-between border-b border-base-900"
->
+<header class="flex flex-col gap-4 px-6 py-4 border-b border-base-800">
 	<slot />
 </header>

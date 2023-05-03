@@ -1,6 +1,8 @@
 <script>
 </script>
 
-<div class="fixed z-10 left-0 right-0 top-14 bottom-0 flex overflow-y-auto">
+<div
+	class="flex-auto flex w-full p-6 md:p-12 items-start justify-center overflow-y-auto bg-gradient-to-b from-base-950 to-black"
+>
 	<slot />
 </div>

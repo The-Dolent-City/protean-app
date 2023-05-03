@@ -4,13 +4,15 @@ import { AuthApiError } from '@supabase/supabase-js';
 
 export const actions = {
 	default: async (event) => {
+		console.log('signin');
 		const { request } = event;
 		const { supabaseClient } = await getSupabase(event);
 		const formData = await request.formData();
 
+		const email = formData.get('email');
 		const password = formData.get('password');
 
-		const { error } = await supabaseClient.auth.updateUser({ password: password });
+		const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
 		if (error) {
 			console.error(error);
@@ -26,6 +28,6 @@ export const actions = {
 			});
 		}
 
-		throw redirect(303, '/auth');
+		throw redirect(303, '/games');
 	}
 };

@@ -40,7 +40,7 @@
 	<div class="flex flex-col gap-6 px-12 py-6">
 		<slot name="fields" />
 	</div>
-	<div class="flex flex-col">
+	<div class="flex flex-col px-12 pb-6">
 		<slot name="buttons" />
 	</div>
 </form>

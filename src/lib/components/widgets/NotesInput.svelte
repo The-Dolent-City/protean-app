@@ -1,8 +1,8 @@
 <script>
+	import { page } from '$app/stores';
 	import { supabaseClient } from '$lib/db';
 	import { addNote } from '$lib/api';
 	import { channel } from '$lib/stores/channel-store';
-	import { user } from '$lib/stores/user-store';
 	import Textarea from '$lib/components/inputs/Textarea.svelte';
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 
@@ -12,7 +12,7 @@
 	async function submitOnEnter(event) {
 		if (event.key === 'Enter' && validate()) {
 			try {
-				await addNote(supabaseClient, value, $channel.id, $user.id);
+				await addNote(supabaseClient, value, $channel.id, $page?.data?.user?.id);
 			} catch (e) {
 				error = 'Invalid note';
 			}

@@ -1,29 +1,28 @@
 <script>
-	let link = null;
-	export { link as href };
+	import { CssBuilder } from '$lib/builders/css-builder';
 
+	let link = null;
+	let className = null;
 	export let formaction = null;
+	export { link as href, className as class };
+
+	$: css = new CssBuilder()
+		.addClass('flex px-6 py-2.5 gap-3 items-center justify-center rounded')
+		.addClass('font-semibold text-sm text-focus')
+		.addClass('text-black bg-white')
+		.addClass('acc-focus')
+		.addClass(className, className)
+		.build();
 </script>
 
 {#if link}
-	<a
-		href={link}
-		class="flex px-12 py-4 gap-3 items-start font-medium text-lg text-focus outline-base-900 bg-transparent outline outline-1 hover:outline-base-700 hover:bg-base-900 focus:outline-base-700 focus:bg-base-900"
-	>
+	<a href={link} class={css}>
 		<slot name="icon" />
-		<span class="mt-0.5 text-left">
-			<slot name="text" />
-		</span>
+		<slot name="text" />
 	</a>
 {:else}
-	<button
-		type="submit"
-		{formaction}
-		class="flex px-12 py-4 gap-3 items-start font-medium text-lg text-focus outline-base-900 bg-transparent outline outline-1 hover:outline-base-700 hover:bg-base-900 focus:outline-base-700 focus:bg-base-900"
-	>
+	<button type="submit" {formaction} class={css}>
 		<slot name="icon" />
-		<span class="mt-0.5 text-left">
-			<slot name="text" />
-		</span>
+		<slot name="text" />
 	</button>
 {/if}

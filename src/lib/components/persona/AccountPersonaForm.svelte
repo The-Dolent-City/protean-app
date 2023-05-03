@@ -1,9 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import { supabaseClient } from '$lib/db';
 	import { updateUser } from '$lib/api';
 	import { channelMessages, channelRolls, channelUsers, presence } from '$lib/stores/channel-store';
-	import { user } from '$lib/stores/user-store';
 	import Textfield from '$lib/components/inputs/Textfield.svelte';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 
@@ -27,8 +27,8 @@
 	let error;
 
 	onMount(() => {
-		formNickname = $user?.nickname;
-		formColor = $user?.color ? $user.color : '#27272a';
+		formNickname = $page?.data?.user?.nickname;
+		formColor = $page?.data?.user?.color ? $page?.data?.user.color : '#27272a';
 	});
 
 	function valid() {
@@ -39,32 +39,43 @@
 		if (changesMade && valid()) {
 			submitting = true;
 			try {
-				await updateUser(supabaseClient, $user?.id, formNickname, formColor);
+				await updateUser(supabaseClient, $page?.data?.user?.id, formNickname, formColor);
+
+				// Update user references in channel messages
 				$channelMessages?.forEach((message) => {
-					if (message.author.id === $user?.id) {
+					if (message && message.author.id === $page?.data?.user?.id) {
 						message.author.nickname = formNickname;
 						message.author.color = formColor;
 					}
 				});
 				$channelMessages = $channelMessages;
+
+				// Update user references in channel rolls
 				$channelRolls?.forEach((roll) => {
-					if (roll.author.id === $user?.id) {
+					if (roll && roll.author.id === $page?.data?.user?.id) {
 						roll.author.nickname = formNickname;
 						roll.author.color = formColor;
 					}
 				});
 				$channelRolls = $channelRolls;
+
+				// Update user references in channel users
 				$channelUsers?.forEach((channelUser) => {
-					if (channelUser?.id === $user?.id) {
+					if (channelUser && channelUser?.id === $page?.data?.user?.id) {
 						channelUser.nickname = formNickname;
 						channelUser.color = formColor;
 					}
 				});
 				$channelUsers = $channelUsers;
-				$user.nickname = formNickname;
-				$user.color = formColor;
+
+				// Update user reference
+				if ($page?.data?.user) {
+					$page.data.user.nickname = formNickname;
+					$page.data.user.color = formColor;
+				}
+
 				await $presence.track({
-					user: $user
+					user: $page?.data?.user
 				});
 			} catch (e) {
 				error = e;
@@ -78,7 +89,8 @@
 		}
 	}
 
-	$: changesMade = formNickname != $user?.nickname || formColor != $user?.color;
+	$: changesMade =
+		formNickname != $page?.data?.user?.nickname || formColor != $page?.data?.user?.color;
 </script>
 
 <form on:submit|preventDefault={submit} class="flex flex-col">

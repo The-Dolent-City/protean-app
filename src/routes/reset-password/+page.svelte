@@ -1,9 +1,6 @@
 <script>
-	import Email from 'carbon-icons-svelte/lib/Email.svelte';
-	import Security from 'carbon-icons-svelte/lib/Security.svelte';
 	import AuthForm from '$lib/components/authentication/AuthForm.svelte';
 	import AuthButton from '$lib/components/authentication/AuthButton.svelte';
-	import AuthButtonIcon from '$lib/components/authentication/AuthButtonIcon.svelte';
 	import Textfield from '$lib/components/inputs/Textfield.svelte';
 
 	export let form;
@@ -30,17 +27,18 @@
 		</svelte:fragment>
 		<svelte:fragment slot="buttons">
 			<AuthButton>
-				<AuthButtonIcon slot="icon" class="bg-blue-600">
-					<Email size={20} />
-				</AuthButtonIcon>
-				<svelte:fragment slot="text">Send password reset link</svelte:fragment>
+				<svelte:fragment slot="text">Send link</svelte:fragment>
 			</AuthButton>
-			<AuthButton href="/auth">
-				<AuthButtonIcon slot="icon" class="bg-base-600">
-					<Security size={20} />
-				</AuthButtonIcon>
-				<svelte:fragment slot="text">Back to login</svelte:fragment>
-			</AuthButton>
+			<hr class="my-6 border-t border-base-800" />
+			<div class="flex gap-1 items-center text-sm">
+				<p>Mistake?</p>
+				<a
+					href="/signin"
+					class="block text-center rounded text-primary-500 hover:underline focus:underline focus:outline-none"
+				>
+					Back to sign in
+				</a>
+			</div>
 		</svelte:fragment>
 	</AuthForm>
 </div>

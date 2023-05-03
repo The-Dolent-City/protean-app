@@ -14,7 +14,7 @@
 			invalidate('supabase:auth');
 
 			if (event == 'PASSWORD_RECOVERY') {
-				throw new redirect(303, '/auth/update-password');
+				throw new redirect(303, '/update-password');
 			}
 		});
 
