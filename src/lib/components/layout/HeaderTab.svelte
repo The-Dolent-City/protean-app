@@ -12,9 +12,6 @@
 		.build();
 
 	$: active = $page?.url?.pathname === href;
-	$: console.log($page?.url?.pathname);
-	$: console.log(href);
-	$: console.log(active);
 </script>
 
 <a {href} class={css}>

@@ -10,7 +10,8 @@ module.exports = {
 				primary: colors.blue
 			},
 			fontFamily: {
-				sans: 'InterVariable, Inter, Helvetica, Arial, sans-serif'
+				sans: 'InterVariable, Inter, Helvetica, Arial, sans-serif',
+				dice: ['Dicier']
 			},
 			fontSize: {
 				xs: ['0.75rem', '1rem']

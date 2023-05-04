@@ -3,7 +3,7 @@
 	import { useOutsideClick } from '$lib/actions/use-outside-click';
 	import { CssBuilder } from '$lib/builders/css-builder';
 
-	export let open;
+	export let open = false;
 	export let position = 'left';
 	export let triggerType = 'click';
 
