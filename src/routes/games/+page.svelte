@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import { user } from '$lib/stores/user-store';
 	import Header from '$lib/components/layout/Header.svelte';
 	import HeaderBackArrow from '$lib/components/layout/HeaderBackArrow.svelte';
 	import HeaderTitle from '$lib/components/layout/HeaderTitle.svelte';
@@ -7,7 +8,8 @@
 	import HeaderTopLeft from '$lib/components/layout/HeaderTopLeft.svelte';
 	import HeaderTopRight from '$lib/components/layout/HeaderTopRight.svelte';
 	import Main from '$lib/components/layout/Main.svelte';
-	import Persona from '$lib/components/persona/AccountPersona.svelte';
+	import AccountPersona from '$lib/components/persona/AccountPersona.svelte';
+	import SetStoreAsync from '$lib/components/async/SetStoreAsync.svelte';
 
 	export let data;
 </script>
@@ -24,9 +26,14 @@
 			<HeaderTitle>Games</HeaderTitle>
 		</HeaderTopLeft>
 		<HeaderTopRight>
-			{#if $page?.data?.user}
-				<Persona />
-			{/if}
+			{#await $page?.data?.streamingUser?.data}
+				<AccountPersona loading />
+			{:then data}
+				<SetStoreAsync store={user} {data} />
+				<AccountPersona />
+			{:catch error}
+				<AccountPersona />
+			{/await}
 		</HeaderTopRight>
 	</HeaderTop>
 </Header>

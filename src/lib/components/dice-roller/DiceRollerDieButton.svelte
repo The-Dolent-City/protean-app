@@ -5,7 +5,7 @@
 	$: die = `D${number}`;
 
 	async function click() {
-		await onclick(number);
+		await onclick(die?.toLowerCase());
 	}
 </script>
 

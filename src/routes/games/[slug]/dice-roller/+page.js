@@ -10,10 +10,11 @@ export const load = async (event) => {
 	}
 
 	const { channel } = await event?.parent();
-	const rolls = await getRolls(supabaseClient, channel?.id);
 
 	return {
 		session,
-		rolls
+		streamingRolls: {
+			data: getRolls(supabaseClient, channel?.id)
+		}
 	};
 };

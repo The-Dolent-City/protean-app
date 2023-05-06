@@ -1,12 +1,14 @@
 <script>
 	import { CssBuilder } from '$lib/builders/css-builder.js';
+	import { Error } from 'carbon-icons-svelte';
 	import { fade } from 'svelte/transition';
 
 	export let onclick = null;
 	export let letters = null;
 	export let color = '#27272a';
-	export let loading = false;
 	export let size = 'md';
+	export let loading = false;
+	export let errored = false;
 
 	$: css = new CssBuilder()
 		.addClass('uppercase')
@@ -18,10 +20,25 @@
 		.addClass('w-10 h-10 text-lg text-focus', size === 'lg')
 		.addClass('w-12 h-12 text-lg text-focus', size === 'xl')
 		.build();
+
+	$: errorSize =
+		size === 'xs'
+			? 16
+			: size === 'sm'
+			? 24
+			: size === 'md'
+			? 32
+			: size === 'lg'
+			? 40
+			: size === 'xl'
+			? 48
+			: 16;
 </script>
 
 {#if loading}
 	<div transition:fade|local={{ duration: 500 }} class={css} style:background-color={'#27272a'} />
+{:else if errored}
+	<Error size={errorSize} class="text-red-600" title="User account error" />
 {:else if onclick}
 	<button
 		on:click={onclick}

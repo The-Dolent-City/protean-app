@@ -9,9 +9,10 @@ export const load = async (event) => {
 		throw redirect(303, '/signin');
 	}
 
-	const user = await getUser(supabaseClient, session?.user?.id);
-
 	return {
-		user
+		session,
+		streamingUser: {
+			data: getUser(supabaseClient, session?.user?.id)
+		}
 	};
 };

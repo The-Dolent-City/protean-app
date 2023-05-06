@@ -3,6 +3,7 @@
 	import { supabaseClient } from '$lib/db';
 	import { addRoll } from '$lib/api';
 	import { DiceRoll } from '@dice-roller/rpg-dice-roller';
+	import { user } from '$lib/stores/user-store';
 	import DiceRollerDieButton from '$lib/components/dice-roller/DiceRollerDieButton.svelte';
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 
@@ -28,8 +29,10 @@
 			error = null;
 			const roll = new DiceRoll(v);
 			value = '';
-			await addRoll(supabaseClient, roll, $page?.data?.channel?.id, $page?.data?.user?.id);
+			await addRoll(supabaseClient, roll, $page?.data?.channel?.id, $user?.id);
 		} catch (e) {
+			console.log(v);
+			console.log(e);
 			error = 'Invalid dice roll';
 		}
 	}
