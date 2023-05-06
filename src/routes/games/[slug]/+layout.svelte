@@ -11,7 +11,7 @@
 	import HeaderTopRight from '$lib/components/layout/HeaderTopRight.svelte';
 	import Main from '$lib/components/layout/Main.svelte';
 	import AccountPersona from '$lib/components/persona/AccountPersona.svelte';
-	import PresenceWidget from '$lib/components/widgets/presence/PresenceWidget.svelte';
+	import PresenceWidget from '$lib/components/presence/PresenceWidget.svelte';
 	import SetStoreAsync from '$lib/components/async/SetStoreAsync.svelte';
 
 	export let data;

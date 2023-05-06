@@ -7,7 +7,6 @@
 	onMount(() => {
 		if (store) {
 			store.set(data);
-			console.log(data);
 		}
 	});
 </script>
