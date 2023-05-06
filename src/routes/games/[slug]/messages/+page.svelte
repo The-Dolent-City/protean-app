@@ -1,9 +1,9 @@
 <script>
 	import { page } from '$app/stores';
-	import { channelRolls } from '$lib/stores/channel-store';
+	import { channelMessages } from '$lib/stores/channel-store';
 	import AlertError from '$lib/components/alerts/AlertError.svelte';
-	import DiceRolls from '$lib/components/dice-roller/DiceRolls.svelte';
-	import DiceRollerInput from '$lib/components/dice-roller/DiceRollerInput.svelte';
+	import Messages from '$lib/components/messages/Messages.svelte';
+	import MessageInput from '$lib/components/messages/MessageInput.svelte';
 	import SetStoreAsync from '$lib/components/async/SetStoreAsync.svelte';
 
 	$: title = `Protean | ${$page?.data?.header ?? 'Game'}`;
@@ -15,13 +15,13 @@
 </svelte:head>
 
 <div class="flex-1 flex flex-col max-w-4xl max-h-full gap-3 md:gap-6">
-	{#await $page?.data?.streamingRolls?.data}
-		<DiceRolls loading />
+	{#await $page?.data?.streamingMessages?.data}
+		<Messages loading />
 	{:then data}
-		<SetStoreAsync store={channelRolls} {data} />
-		<DiceRolls />
+		<SetStoreAsync store={channelMessages} {data} />
+		<Messages />
 	{:catch error}
-		<AlertError>Unable to load dice rolls</AlertError>
+		<AlertError>Unable to load messages</AlertError>
 	{/await}
-	<DiceRollerInput />
+	<MessageInput />
 </div>

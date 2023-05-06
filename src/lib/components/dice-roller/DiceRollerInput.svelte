@@ -31,8 +31,6 @@
 			value = '';
 			await addRoll(supabaseClient, roll, $page?.data?.channel?.id, $user?.id);
 		} catch (e) {
-			console.log(v);
-			console.log(e);
 			error = 'Invalid dice roll';
 		}
 	}

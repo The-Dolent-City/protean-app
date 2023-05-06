@@ -71,11 +71,26 @@
 
 	function setupRealtime() {
 		supabaseClient
+			.channel(`public:messages`)
+			.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) =>
+				onInsertMessage(payload?.new)
+			)
+			.subscribe();
+
+		supabaseClient
 			.channel(`public:rolls`)
 			.on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rolls' }, (payload) =>
 				onInsertRoll(payload?.new)
 			)
 			.subscribe();
+	}
+
+	async function onInsertMessage(message) {
+		if (message && message.channel_id === $page?.data?.channel?.id) {
+			let author = await getUser(supabaseClient, message.user_id);
+			message.author = author;
+			$channelMessages = [...$channelMessages, message];
+		}
 	}
 
 	async function onInsertRoll(roll) {
