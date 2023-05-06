@@ -40,29 +40,40 @@
 			submitting = true;
 			try {
 				await updateUser(supabaseClient, $user?.id, formNickname, formColor);
+
+				// Update user references in channel messages
 				$channelMessages?.forEach((message) => {
-					if (message.author.id === $user?.id) {
+					if (message && message.author.id === $user?.id) {
 						message.author.nickname = formNickname;
 						message.author.color = formColor;
 					}
 				});
 				$channelMessages = $channelMessages;
+
+				// Update user references in channel rolls
 				$channelRolls?.forEach((roll) => {
-					if (roll.author.id === $user?.id) {
+					if (roll && roll.author.id === $user?.id) {
 						roll.author.nickname = formNickname;
 						roll.author.color = formColor;
 					}
 				});
 				$channelRolls = $channelRolls;
+
+				// Update user references in channel users
 				$channelUsers?.forEach((channelUser) => {
-					if (channelUser?.id === $user?.id) {
+					if (channelUser && channelUser?.id === $user?.id) {
 						channelUser.nickname = formNickname;
 						channelUser.color = formColor;
 					}
 				});
 				$channelUsers = $channelUsers;
-				$user.nickname = formNickname;
-				$user.color = formColor;
+
+				// Update user reference
+				if ($user) {
+					$user.nickname = formNickname;
+					$user.color = formColor;
+				}
+
 				await $presence.track({
 					user: $user
 				});

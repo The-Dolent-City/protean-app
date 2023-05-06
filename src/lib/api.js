@@ -127,7 +127,7 @@ export const getRolls = async (client, channel_id) => {
 			.from('rolls')
 			.select(`*, author:user_id(*)`)
 			.eq('channel_id', channel_id)
-			.order('inserted_at', { ascending: false });
+			.order('inserted_at', { ascending: true });
 		return data;
 	} catch (error) {
 		console.error(error);

@@ -2,8 +2,10 @@
 	import '../styles/app.css';
 	import { onMount } from 'svelte';
 	import { redirect } from '@sveltejs/kit';
-	import { supabaseClient } from '$lib/db';
+	import { dev } from '$app/environment';
 	import { invalidate } from '$app/navigation';
+	import { inject } from '@vercel/analytics';
+	import { supabaseClient } from '$lib/db';
 	import Container from '$lib/components/layout/Container.svelte';
 
 	onMount(() => {
@@ -14,7 +16,7 @@
 			invalidate('supabase:auth');
 
 			if (event == 'PASSWORD_RECOVERY') {
-				throw new redirect(303, '/auth/update-password');
+				throw new redirect(303, '/update-password');
 			}
 		});
 
@@ -22,6 +24,8 @@
 			subscription.unsubscribe();
 		};
 	});
+
+	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <Container>

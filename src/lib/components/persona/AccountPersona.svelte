@@ -7,6 +7,8 @@
 	import Popover from '$lib/components/surfaces/Popover.svelte';
 	import Logout from 'carbon-icons-svelte/lib/Logout.svelte';
 
+	export let loading = false;
+
 	let open = false;
 
 	function toggleOpen() {
@@ -19,11 +21,13 @@
 
 	async function signout() {
 		await supabaseClient.auth.signOut();
-		throw redirect(303, '/auth');
+		throw redirect(303, '/signin');
 	}
 </script>
 
-{#if $user}
+{#if loading}
+	<Persona loading />
+{:else if $user}
 	<Popover bind:open position="right">
 		<Persona
 			slot="trigger"
@@ -49,5 +53,5 @@
 		</svelte:fragment>
 	</Popover>
 {:else}
-	<Persona loading />
+	<Persona errored />
 {/if}

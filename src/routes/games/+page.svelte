@@ -1,16 +1,17 @@
 <script>
-	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import { user } from '$lib/stores/user-store';
 	import Header from '$lib/components/layout/Header.svelte';
-	import HeaderLink from '$lib/components/layout/HeaderLink.svelte';
+	import HeaderBackArrow from '$lib/components/layout/HeaderBackArrow.svelte';
+	import HeaderTitle from '$lib/components/layout/HeaderTitle.svelte';
+	import HeaderTop from '$lib/components/layout/HeaderTop.svelte';
+	import HeaderTopLeft from '$lib/components/layout/HeaderTopLeft.svelte';
+	import HeaderTopRight from '$lib/components/layout/HeaderTopRight.svelte';
 	import Main from '$lib/components/layout/Main.svelte';
-	import Persona from '$lib/components/persona/AccountPersona.svelte';
+	import AccountPersona from '$lib/components/persona/AccountPersona.svelte';
+	import SetStoreAsync from '$lib/components/async/SetStoreAsync.svelte';
 
 	export let data;
-
-	onMount(() => {
-		$user = data?.user;
-	});
 </script>
 
 <svelte:head>
@@ -19,20 +20,28 @@
 </svelte:head>
 
 <Header>
-	<div class="flex gap-1 items-center">
-		<HeaderLink href={`/`}>protean</HeaderLink>
-		<span class="text-base-700 cursor-default">/</span>
-		<HeaderLink>games</HeaderLink>
-	</div>
-	{#if $user}
-		<Persona />
-	{/if}
+	<HeaderTop>
+		<HeaderTopLeft>
+			<HeaderBackArrow href="/" />
+			<HeaderTitle>Games</HeaderTitle>
+		</HeaderTopLeft>
+		<HeaderTopRight>
+			{#await $page?.data?.streamingUser?.data}
+				<AccountPersona loading />
+			{:then data}
+				<SetStoreAsync store={user} {data} />
+				<AccountPersona />
+			{:catch error}
+				<AccountPersona />
+			{/await}
+		</HeaderTopRight>
+	</HeaderTop>
 </Header>
 <Main>
-	<div class="flex flex-col w-full gap-4 p-6">
+	<div class="flex flex-col max-w-2xl gap-6">
 		{#if data?.channels}
 			{#each data.channels as channel}
-				<div class="max-w-xl">
+				<div class="">
 					<a
 						href={`/games/${channel.slug}`}
 						class="inline text-xl font-semibold text-focus decoration-2 decoration-base-300 hover:underline mst"
@@ -43,7 +52,7 @@
 						{channel.description}
 					</p>
 				</div>
-				<hr class="w-full border border-base-800" />
+				<hr class="-mx-6 border border-base-800" />
 			{/each}
 		{:else}
 			<h1>Unable to retrieve games</h1>

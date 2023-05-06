@@ -1,33 +1,55 @@
 <script>
+	import { CssBuilder } from '$lib/builders/css-builder.js';
+	import { Error } from 'carbon-icons-svelte';
 	import { fade } from 'svelte/transition';
 
 	export let onclick = null;
 	export let letters = null;
 	export let color = '#27272a';
+	export let size = 'md';
 	export let loading = false;
+	export let errored = false;
+
+	$: css = new CssBuilder()
+		.addClass('uppercase')
+		.addClass('flex-none flex items-center justify-center rounded-full animate-pulse', loading)
+		.addClass('flex-none flex items-center justify-center rounded-full acc-focus', !loading)
+		.addClass('w-3 h-3 md:w-4 md:h-4 text-transparent', size === 'xs')
+		.addClass('w-4 h-4 md:w-6 md:h-6 text-xs text-focus', size === 'sm')
+		.addClass('w-6 h-6 md:w-8 md:h-8 text-xs md:text-base text-focus', size === 'md')
+		.addClass('w-8 h-8 md:w-10 md:h-10 text-lg text-focus', size === 'lg')
+		.addClass('w-10 h-10 md:w-12 md:h-12 text-lg text-focus', size === 'xl')
+		.build();
+
+	$: errorSize =
+		size === 'xs'
+			? 16
+			: size === 'sm'
+			? 24
+			: size === 'md'
+			? 32
+			: size === 'lg'
+			? 40
+			: size === 'xl'
+			? 48
+			: 16;
 </script>
 
 {#if loading}
-	<div
-		transition:fade|local={{ duration: 500 }}
-		class="flex-none flex w-8 h-8 items-center justify-center rounded-full animate-pulse"
-		style:background-color={'#27272a'}
-	/>
+	<div transition:fade|local={{ duration: 500 }} class={css} style:background-color={'#27272a'} />
+{:else if errored}
+	<Error size={errorSize} class="text-red-600" title="User account error" />
 {:else if onclick}
 	<button
 		on:click={onclick}
 		transition:fade|local={{ duration: 500 }}
-		class="flex-none flex w-8 h-8 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-100"
+		class={css}
 		style:background-color={color}
 	>
-		<span class="text-focus uppercase">{letters}</span>
+		<span>{letters}</span>
 	</button>
 {:else}
-	<div
-		transition:fade|local={{ duration: 500 }}
-		class="flex-none flex w-8 h-8 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-100"
-		style:background-color={color}
-	>
-		<span class="text-focus uppercase">{letters}</span>
+	<div transition:fade|local={{ duration: 500 }} class={css} style:background-color={color}>
+		<span>{letters}</span>
 	</div>
 {/if}

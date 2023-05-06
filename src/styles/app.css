@@ -4,6 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	@font-face {
+		font-family: 'Dicier';
+		src: local('Dicier-Round-Dark'), local('Dicier Round Dark'), local('dicier-round-dark'),
+			local('dicier round dark'), url('/assets/fonts/dicer/Dicier-Rounded-Dark.woff2');
+		font-weight: normal;
+		font-display: swap;
+		font-feature-settings: “liga” 1, “kern” 1, “calt” 1;
+	}
+}
+
 @layer components {
 	.text-less-focus {
 		@apply text-base-600;
@@ -18,7 +29,7 @@
 
 @layer utilities {
 	.acc-focus {
-		@apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-black dark:focus-visible:outline-white;
+		@apply focus-visible:outline focus-visible:outline-2 focus:outline-offset-4 focus-visible:outline-black dark:focus-visible:outline-white;
 	}
 	.mst {
 		@apply motion-safe:transition motion-safe:duration-150 motion-safe:ease-in-out;
