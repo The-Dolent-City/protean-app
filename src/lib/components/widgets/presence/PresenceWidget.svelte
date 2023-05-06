@@ -109,12 +109,12 @@
 {#if $channelUsers && $channelUsers.length > 0}
 	<Popover position="right" triggerType="hover">
 		<div slot="trigger" class="flex gap-3 items-center">
-			<span class="text-sm">{onlineCount} online</span>
+			<span class="text-sm truncate">{onlineCount} online</span>
 			{#if $channelUsers}
 				<div class="flex flex-wrap">
 					{#each $channelUsers as user}
 						<div
-							class="w-6 h-6 -mx-1 rounded-full border-2 border-black"
+							class="w-4 h-4 md:w-6 md:h-6 -mx-1 rounded-full border-2 border-black"
 							style:background-color={user?.color}
 						/>
 					{/each}

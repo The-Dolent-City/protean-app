@@ -36,7 +36,9 @@
 	}
 </script>
 
-<div class="flex-none flex gap-4 px-3 py-3 items-center rounded border border-base-800 bg-black">
+<div
+	class="flex-none flex flex-wrap-reverse md:flex-wrap gap-4 px-3 py-3 items-center rounded border border-base-800 bg-black"
+>
 	<div class="grow">
 		<input
 			bind:value
@@ -53,8 +55,8 @@
 			</div>
 		{/if}
 	</div>
-	<div class="flex-none w-px h-10 rounded bg-base-800" />
-	<div class="flex flex-wrap gap-4">
+	<div class="hidden md:block flex-none w-px h-10 rounded bg-base-800" />
+	<div class="flex-1 flex gap-4 justify-center">
 		<DiceRollerDieButton onclick={rollDie} number={4} />
 		<DiceRollerDieButton onclick={rollDie} number={6} />
 		<DiceRollerDieButton onclick={rollDie} number={8} />

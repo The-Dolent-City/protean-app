@@ -52,7 +52,7 @@
 						{channel.description}
 					</p>
 				</div>
-				<hr class="w-full -mx-6 border border-base-800" />
+				<hr class="-mx-6 border border-base-800" />
 			{/each}
 		{:else}
 			<h1>Unable to retrieve games</h1>

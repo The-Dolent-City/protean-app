@@ -12,7 +12,7 @@
 	/>
 </svelte:head>
 
-<div class="flex-none max-w-2xl p-12 rounded border border-base-800 bg-black">
+<div class="flex-1 max-w-2xl p-12 rounded border border-base-800 bg-black">
 	{#if $page?.data?.channel?.description}
 		<p class="text-xl leading-relaxed">
 			{$page.data.channel.description}
