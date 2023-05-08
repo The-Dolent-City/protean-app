@@ -9,10 +9,12 @@ export const load = async (event) => {
 		throw redirect(303, '/signin');
 	}
 
-	const { channel } = await event?.parent();
+	const { streamingChannel } = await event?.parent();
+	const channel = await streamingChannel.data;
 
 	return {
 		session,
+		channel,
 		streamingMessages: {
 			data: getMessages(supabaseClient, channel?.id)
 		}

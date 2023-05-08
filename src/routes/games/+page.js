@@ -9,10 +9,10 @@ export const load = async (event) => {
 		throw redirect(303, '/signin');
 	}
 
-	const channels = await getChannels(supabaseClient);
-
 	return {
 		session,
-		channels
+		streamingChannels: {
+			data: getChannels(supabaseClient)
+		}
 	};
 };

@@ -1,6 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 	import { user } from '$lib/stores/user-store';
+	import AlertError from '$lib/components/alerts/AlertError.svelte';
+	import AlertWarning from '$lib/components/alerts/AlertWarning.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
 	import HeaderBackArrow from '$lib/components/layout/HeaderBackArrow.svelte';
 	import HeaderTitle from '$lib/components/layout/HeaderTitle.svelte';
@@ -10,8 +12,6 @@
 	import Main from '$lib/components/layout/Main.svelte';
 	import AccountPersona from '$lib/components/persona/AccountPersona.svelte';
 	import SetStoreAsync from '$lib/components/async/SetStoreAsync.svelte';
-
-	export let data;
 </script>
 
 <svelte:head>
@@ -39,23 +39,35 @@
 </Header>
 <Main>
 	<div class="flex flex-col max-w-2xl gap-6">
-		{#if data?.channels}
-			{#each data.channels as channel}
-				<div class="">
-					<a
-						href={`/games/${channel.slug}`}
-						class="inline text-xl font-semibold text-focus decoration-2 decoration-base-300 hover:underline mst"
-					>
-						{channel?.title}
-					</a>
-					<p class="mt-2">
-						{channel.description}
-					</p>
+		{#await $page?.data?.streamingChannels?.data}
+			{#each Array(4) as _, i}
+				<div class="w-2xl">
+					<div class="w-40 h-6 rounded bg-base-900 animate-pulse" />
+					<p class="w-full h-20 mt-2 rounded bg-base-900 animate-pulse" />
 				</div>
 				<hr class="-mx-6 border border-base-800" />
 			{/each}
-		{:else}
-			<h1>Unable to retrieve games</h1>
-		{/if}
+		{:then channels}
+			{#if channels}
+				{#each channels as channel}
+					<div class="">
+						<a
+							href={`/games/${channel.slug}`}
+							class="inline text-xl font-semibold text-focus decoration-2 decoration-base-300 hover:underline mst"
+						>
+							{channel?.title}
+						</a>
+						<p class="mt-2">
+							{channel.description}
+						</p>
+					</div>
+					<hr class="-mx-6 border border-base-800" />
+				{/each}
+			{:else}
+				<AlertWarning>Unable to retrieve games</AlertWarning>
+			{/if}
+		{:catch error}
+			<AlertError>Unable to retrieve games</AlertError>
+		{/await}
 	</div>
 </Main>

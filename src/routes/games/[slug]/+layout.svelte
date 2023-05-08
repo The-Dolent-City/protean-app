@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import { channel } from '$lib/stores/channel-store';
 	import { user } from '$lib/stores/user-store';
 	import Header from '$lib/components/layout/Header.svelte';
 	import HeaderBackArrow from '$lib/components/layout/HeaderBackArrow.svelte';
@@ -16,10 +17,10 @@
 
 	export let data;
 
-	$: headerTitle = $page?.data?.channel?.title ? $page.data.channel.title : 'Game';
-	$: gameHref = `/games/${$page?.data?.channel?.slug}`;
-	$: diceRollerHref = `/games/${$page?.data?.channel?.slug}/dice-roller`;
-	$: messagesHref = `/games/${$page?.data?.channel?.slug}/messages`;
+	$: headerTitle = $channel?.title ?? 'Game';
+	$: gameHref = `/games/${$channel?.slug}`;
+	$: diceRollerHref = `/games/${$channel?.slug}/dice-roller`;
+	$: messagesHref = `/games/${$channel?.slug}/messages`;
 </script>
 
 <svelte:head>

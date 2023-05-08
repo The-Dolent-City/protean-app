@@ -15,7 +15,7 @@
 	<meta name="description" content="Sign in or change your password for the Protean web app." />
 </svelte:head>
 
-<div class="flex w-full h-full p-6 items-center justify-center">
+<div class="flex w-full h-full p-6 items-center justify-center bg-base-950">
 	<AuthForm error={form?.error} notification={form?.message}>
 		<svelte:fragment slot="title">Sign in</svelte:fragment>
 		<svelte:fragment slot="fields">

@@ -1,12 +1,17 @@
 <script>
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { channelRolls } from '$lib/stores/channel-store';
+	import { channel, channelRolls } from '$lib/stores/channel-store';
 	import AlertError from '$lib/components/alerts/AlertError.svelte';
 	import DiceRolls from '$lib/components/dice-roller/DiceRolls.svelte';
 	import DiceRollerInput from '$lib/components/dice-roller/DiceRollerInput.svelte';
 	import SetStoreAsync from '$lib/components/async/SetStoreAsync.svelte';
 
 	$: title = `Protean | ${$page?.data?.header ?? 'Game'}`;
+
+	onMount(() => {
+		$channel = $page?.data?.channel;
+	});
 </script>
 
 <svelte:head>
