@@ -12,3 +12,5 @@ export const load = async (event) => {
 		session
 	};
 };
+
+export const prerender = true;

@@ -9,11 +9,13 @@ export const load = async (event) => {
 		throw redirect(303, '/signin');
 	}
 
-	const channel = await getChannel(supabaseClient, event.params.slug);
-
 	return {
 		session,
 		header: event.params.slug,
-		channel
+		streamingChannel: {
+			data: getChannel(supabaseClient, event.params.slug)
+		}
 	};
 };
+
+export const prerender = true;

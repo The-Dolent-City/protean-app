@@ -9,12 +9,16 @@ export const load = async (event) => {
 		throw redirect(303, '/signin');
 	}
 
-	const { channel } = await event?.parent();
+	const { streamingChannel } = await event?.parent();
+	const channel = await streamingChannel.data;
 
 	return {
 		session,
+		channel,
 		streamingRolls: {
 			data: getRolls(supabaseClient, channel?.id)
 		}
 	};
 };
+
+export const prerender = true;
