@@ -10,7 +10,7 @@
 <form
 	{method}
 	{action}
-	class="flex flex-col min-w-[12rem] w-[24rem] max-w-[24rem] overflow-hidden shadow-xl rounded-md border border-base-900 bg-gradient-to-b from-base-900 to-black"
+	class="flex flex-col min-w-[12rem] w-[24rem] max-w-[24rem] overflow-hidden shadow-xl rounded-md border border-base-800 bg-black"
 >
 	<h1 class="px-12 py-8 border-b border-base-800 text-3xl font-semibold tracking-tight text-left">
 		<div class="text-default text-lg font-normal tracking-normal mb-2">Protean</div>

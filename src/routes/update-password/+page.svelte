@@ -11,7 +11,7 @@
 	<meta name="description" content="Change your Protean app password to the new one you provide." />
 </svelte:head>
 
-<div class="flex w-full h-full p-6 items-center justify-center">
+<div class="flex w-full h-full p-6 items-center justify-center bg-base-950">
 	<AuthForm error={form?.error} notification={form?.message}>
 		<svelte:fragment slot="title">Update password</svelte:fragment>
 		<svelte:fragment slot="fields">
